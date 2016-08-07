@@ -28,45 +28,9 @@ Template.Dashboard.helpers({
             .admins === undefined) ? false : true;
     },
 
-    pathForCreateSale() {
-        const newToo = TransfersOfOwnership.insert({});
-        const params = {
-            _id: newToo
-        };
-        const queryParams = {
-            // state: 'open'
-        };
-        const routeName = 'createSale';
-        const path = FlowRouter.path(routeName, params, queryParams);
+  
 
-        return path;
-    },
-    pathForCreateOrder() {
-        const newOrder = Orders.insert({soldProducts: []});
-        const params = {
-            _id: newOrder
-        };
-        const queryParams = {
-            // state: 'open'
-        };
-        const routeName = 'createOrder';
-        const path = FlowRouter.path(routeName, params, queryParams);
 
-        return path;
-    },
-    pathForCreateExpense() {
-        const newToo = TransfersOfOwnership.insert({});
-        const params = {
-            _id: newToo
-        };
-        const queryParams = {
-            // state: 'open'
-        };
-        const routeName = 'createExpense';
-        const path = FlowRouter.path(routeName, params, queryParams);
-
-        return path;
-    },
     pathForShowTreasury() {
         const params = {};
         const queryParams = {
@@ -106,8 +70,22 @@ Template.Dashboard.helpers({
 });
 
 Template.Dashboard.events({
-    // "click .js-create-sale": function(e, instance) {
-    //     FlowRouter.go('createSale');
-    // }
+  'click .js-new-order': function(e,instance) {
+        const newOrder = Orders.insert({soldProducts: []});
+        console.log("creating order", newOrder);
+        
+        const params = {
+            _id: newOrder
+        };
+        const queryParams = {
+            // state: 'open'
+        };
+        const routeName = 'showOrder';
+        const path = FlowRouter.path(routeName, params, queryParams);
+        
+        FlowRouter.go(path);
+    
+  }
+  
 
 });

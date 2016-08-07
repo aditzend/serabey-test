@@ -98,6 +98,17 @@ FlowRouter.route('/order/:_id/', {
 
     }
 });
+FlowRouter.route('/orders/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'showOrders',
+    action(params, queryParams) {
+        BlazeLayout.render('App_body', {
+            main: 'Orders_show_page'
+        });
+        //console.log('params', params);
+
+    }
+});
 FlowRouter.route('/too/expense/:_id/', {
     triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'createExpense',

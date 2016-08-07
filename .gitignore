@@ -1,1 +1,3 @@
-node_modules/
+settings.json
+keys.js
+server/secrets.js

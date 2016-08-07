@@ -1,4 +1,5 @@
 import './orders-panel.html';
+import '../pages/orders-show-page.js';
 
 Template.Orders_panel.onCreated(function() {
   this.autorun( () => {
@@ -12,7 +13,7 @@ Template.Orders_panel.helpers({
     return Orders.find({},{limit: 6, sort:{createdAt:-1}});
   },
   timeFromOrderCreation(createdAt) {
-    return moment(createdAt).format("LTS");
+    return moment(createdAt).fromNow();
   },
   pathForOrder(id) {
       
@@ -23,6 +24,19 @@ Template.Orders_panel.helpers({
           // state: 'open'
       };
       const routeName = 'showOrder';
+      const path = FlowRouter.path(routeName, params, queryParams);
+
+      return path;
+  },
+  pathForOrders() {
+      
+      const params = {
+          
+      };
+      const queryParams = {
+          // state: 'open'
+      };
+      const routeName = 'showOrders';
       const path = FlowRouter.path(routeName, params, queryParams);
 
       return path;
