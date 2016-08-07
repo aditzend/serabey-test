@@ -1,0 +1,59 @@
+<template name="xCompany_show">
+
+  {{#momentum plugin='left-to-right'}}
+
+  <div class='container-fluid'>
+    <div class='row'>
+      <div class='col-xs-12 col-md-8 col-lg-9'>
+        {{#with company}}
+          <h1 class='shadow'>{{name}} </h1>
+
+          {{#if cuit}}
+            <h5>CUIT:
+              {{cuit}}</h5>
+          {{/if}}
+        {{/with}}
+
+
+      </div>
+      <div class='col-xs-12 col-md-4 col-lg-3'>
+        <button id="Place_create" class='btn btn-primary' data-action='showPlace_create'>
+          <i class='fa fa-2x fa-map-marker'></i>
+          <i class='fa fa-plus'></i>
+        </button>
+        <button id="Contact_create" class='btn btn-primary' data-action='showContact_create'>
+          <i class='fa fa-2x fa-user'></i>
+          <i class='fa fa-plus'></i>
+        </button>
+        <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+          <i class='fa fa-2x fa-trash'></i>
+        </button>
+
+
+      </div>
+      <div class='col-xs-12 col-md-12 col-lg-12'>
+        <hr>
+      </div>
+
+    </div>
+    {{#if deleting}}
+      {{> Alert_delete}}
+    {{/if}}
+    {{#if editing}}
+      {{> Alert_edit}}
+    {{/if}}
+    {{#if creating}}
+      {{> Alert_Form_Create}}
+    {{/if}}
+    <div class='row'>
+
+        {{> Rel_show}}
+        {{> Place_show}}
+        {{> Contact_show }}
+
+    </div>
+
+  </div>
+  {{/momentum}}
+
+</template>

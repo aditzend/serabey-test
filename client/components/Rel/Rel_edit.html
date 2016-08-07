@@ -1,0 +1,32 @@
+<template name="Rel_edit">
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>
+      EDITAR COMENTARIOS
+    </div>
+    <div class='panel-body' >
+      <form role='form' data-action='save-edit'>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><i class='fa fa-files'></i></span>
+        <input id='notes' type="text" class="form-control" placeholder="Notas" aria-describedby="basic-addon1" value='{{notes}}'>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">T</span>
+        <input id='paymentDays' type="text" class="form-control" placeholder="30" aria-describedby="basic-addon1" value='{{paymentDays}}'>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><i class='fa fa-phone'></i></span>
+        <input id='paymentTerms' type="text" class="form-control" placeholder="Condicion de pago" aria-describedby="basic-addon1" value='{{paymentTerms}}'>
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><i class='fa fa-phone'></i></span>
+        <input id='paymentNotes' type="text" class="form-control" placeholder="Condicion de pago" aria-describedby="basic-addon1" value='{{paymentNotes}}'>
+      </div>
+      <br>
+      <button class='btn btn-success' type='submit' >GUARDAR</button>
+    </form>
+
+    </div>
+  </div>
+</template>

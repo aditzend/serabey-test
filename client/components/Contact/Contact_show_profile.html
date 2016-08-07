@@ -1,0 +1,277 @@
+<template name="Contact_show_profile">
+    <!-- {{> pageHeader title="Ver Contacto" desc='Aca podes ver, editar y agregar informacion a tu contacto' category="Ver" }} -->
+
+    {{#staggering}}
+
+            <div class="row">
+
+                <div class="col-lg-12 text-center m-t-md">
+
+                    <p class='text-big'>
+                      {{contact.treatedAs}}
+                    </p>
+
+                    <h4>{{> Birthday_show (birthData contact) }}</h4>
+                    <p>
+                        <small class='text-muted'>
+                            {{#if getGender contact.isMale}}
+                                <i class='fa fa-male'></i>
+                            {{else}}
+                                <i class='fa fa-female'></i>
+                            {{/if}}
+                            {{contact.name}}
+                            {{contact.lastName}}
+                        </small>
+                    </p>
+                    <p>
+                        <small class='text-muted'></small>
+                        <small class='text-muted'>
+                            {{#if contact.formalTreatment}}
+                                <span class='label label-warning'>FORMAL</span>
+                            {{/if}}
+                        </small>
+
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class='row'>
+              <div class='col-md-1'>
+              </div>
+            {{#if contact.mobile}}
+              <div class="col-md-3">
+                  <a type='button' class='btn btn-primary btn-lg btn-block' href='tel:{{mobile}}'>
+                    <div class="text-center">
+                      <p class="font-light">
+                          Llamar al m&oacute;vil
+                      </p>
+                      <i class='text-big pe-7s pe-7s-phone'></i>
+                      <p class="font-light">
+                        {{phoneCountry contact.mobile}}
+                        {{formatInternational contact.mobile}}
+                      </p>
+                  </div>
+                </a>
+              </div>
+            {{/if}}
+
+{{#if contact.phone}}
+            <div class="col-md-4">
+                <a type='button' class='btn btn-primary2 btn-lg btn-block' href='tel:{{contact.phone}}'>
+                  <div class="text-center">
+                    <p class="font-light">
+                        Llamar al fijo
+                    </p>
+                    <i class='text-big pe-7s pe-7s-phone'></i>
+                    <p class="font-light">
+                    {{formatInternational contact.phone}} Interno : {{contact.internalPhone}}
+                    </p>
+                </div>
+              </a>
+            </div>
+{{/if}}
+{{#if contact.email}}
+            <div class="col-md-3">
+                <a type='button' class='btn btn-success btn-lg btn-block' href='mailto:{{contact.email}}'>
+                  <div class="text-center">
+                    <p class="font-light">
+                        Mandar un mail
+                    </p>
+                    <i class='text-big pe-7s pe-7s-phone'></i>
+                    <p class="font-light">
+                    {{contact.email}}
+                    </p>
+                </div>
+              </a>
+            </div>
+{{/if}}
+          </div>
+          <div class='col-md-1'>
+          </div>
+
+        <div class='row'>
+
+        <div class="col-lg-6">
+            {{#panel title="DATOS" footer="" built=true}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{#if deleting}}
+                            {{Alert_delete}}
+                        {{/if}}
+                        {{#if editing}}
+                            {{Alert_edit}}
+                        {{/if}}
+                        {{#if creating}}
+                            {{Alert_Form_Create}}
+                        {{/if}}
+                            {{#if editingId 'actode'}}
+                                {{> Contact_edit}}
+                            {{else}}
+                                <p>NOMBRE:
+                                    {{contact.name}}
+                                    {{contact.middleName}}
+                                </p>
+                                <p>APELLIDO:
+                                    {{contact.lastName}}</p>
+                                <p>EMAIL :
+                                    {{contact.email}}</p>
+                                <p>CELULAR:
+                                    {{formatInternational contact.mobile}}</p>
+                                <p>TELEFONO DE LINEA:
+                                    {{formatInternational contact.phone}}</p>
+                                <p>INTERNO:
+                                    {{contact.internalPhone}}</p>
+                                <p>TRATAMIENTO:
+                                    {{contact.treatedAs}}
+                                    {{#if formalTreatment}}
+                                        (Tratar de Ud.)
+                                    {{/if}}
+                                </p>
+                                <p>CUMPLEA&Ntilde;OS:
+                                    {{formatDate contact.bDay contact.bMonth contact.bYear}}</p>
+                            {{/if}}
+                    </div>
+                </div>
+            {{/panel}}
+            {{#panel title="X EDITABLE" footer="" built=true}}
+            <table id="user" class="table table-bordered table-striped" style="clear: both">
+                            <tbody>
+                            <tr>
+                                <td width="35%">Simple text field</td>
+
+                                <td width="65%">
+                                  <p id="textArea" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{actode.name}}</p>
+
+                                  <!-- <a href="" id="username" data-type="textarea" data-pk="1" -->
+                                                   <!-- data-title="Enter username" class="editable editable-click">xedita</a> -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Empty text field, required</td>
+                                <td><a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right"
+                                       data-placeholder="Required" data-title="Enter your firstname"
+                                       class="editable editable-click editable-empty">Empty</a></td>
+                            </tr>
+                            <tr>
+                                <td>Select, local array, custom display</td>
+                                <td><a href="#" id="sex" data-type="select" data-pk="1" data-value=""
+                                       data-title="Select sex" class="editable editable-click" style="color: gray;">not
+                                    selected</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Combodate (date)</td>
+                                <td><a href="#" id="dob" data-type="combodate" data-value="1984-05-15"
+                                       data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY"
+                                       data-template="D / MMM / YYYY" data-pk="1" data-title="Select Date of birth"
+                                       class="editable editable-click">15/05/1984</a></td>
+                            </tr>
+                            <tr>
+                                <td>Combodate (datetime)</td>
+                                <td><a href="#" id="event" data-type="combodate" data-template="D MMM YYYY  HH:mm"
+                                       data-format="YYYY-MM-DD HH:mm" data-viewformat="MMM D, YYYY, HH:mm"
+                                       data-pk="1" data-title="Setup event date and time"
+                                       class="editable editable-click editable-empty">Empty</a></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Textarea, buttons below. Submit by <i>ctrl+enter</i></td>
+                                <td><a href="#" id="comments" data-type="textarea" data-pk="1"
+                                       data-placeholder="Your comments here..." data-title="Enter comments"
+                                       class="editable editable-pre-wrapped editable-click">awesome user!</a></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Checklist</td>
+                                <td><a href="#" id="fruits" data-type="checklist" data-value="2,3"
+                                       data-title="Select fruits" class="editable editable-click">peach<br>apple</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+            {{/panel}}
+        </div>
+        <div class="col-lg-6">
+            {{#panel title="RELACIONES" footer="" built=true}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{#if rels}}
+                                <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+                                  <i class='fa fa-2x fa-trash'></i>
+                                </button>
+
+                              {{#each rels}}
+                                  <br>
+                                  {{> Contact_rel_show}}
+                              {{/each}}
+                        {{/if}}
+
+                    </div>
+                </div>
+            {{/panel}}
+        </div>
+      </div>
+
+    {{/staggering}}
+
+</template>
+
+<!-- {{#if rels}}
+      <div class='col-xs-12 col-md-6 col-lg-3'>
+        <h4 class='text-uppercase shadow'>Relaciones</h4>
+        <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+          <i class='fa fa-2x fa-trash'></i>
+        </button>
+
+      {{#each rels}}
+          <br>
+          {{> Contact_rel_show}}
+      {{/each}}
+    </div>
+{{/if}} -->
+
+<!-- <div class='container-fluid'> -->
+<!-- <div class='row'> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-8'> -->
+<!-- {{#with actode}}
+    <h1 >{{treatedAs}}</h1>
+    <h3>{{> Birthday_show}}</h3>
+    <h3 class='shadow text-complement'>{{name}} {{lastName}}</h3>
+  {{/with}}
+  <hr> -->
+<!-- </div> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-4'> -->
+<!--    <button id="rel-create-btn" class='btn btn-primary' data-action='rel-create'>
+    <i class='fa fa-2x fa-link'></i>
+    <i class='fa fa-plus'></i>
+  </button>-->
+<!-- </div> -->
+<!-- </div> -->
+
+<!--<br>
+<div class='alert alert-success appear-first' role='alert'>
+  <p>MODO DE CREACION
+    <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>SALIR</button>
+  </p>
+</div>
+<div class='row'>
+  <div class='col-xs-12 col-md-6 col-lg-3'>
+    {{> Template.dynamic template=create}}
+  </div>
+</div>-->
+
+<!-- <div class='row'> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-3'> -->
+<!-- <h4 class='text-uppercase'>Datos</h4> -->
+
+<!-- <div class='well well-sm well-clickable' data-action='edit-actode' > -->
+
+<!-- </div> -->
+
+<!-- </div> -->
+<!-- </div> -->

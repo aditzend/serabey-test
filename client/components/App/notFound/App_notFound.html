@@ -1,0 +1,17 @@
+<template name="App_notFound">
+
+    <div class="back-link">
+        <a href="{{pathFor 'home'}}" class="btn btn-primary">Volver al panel</a>
+    </div>
+
+    <div class="error-container">
+        <i class="pe-7s-way text-success big-icon"></i>
+        <h1>No podemos encontrar lo que nos pedis.!</h1>
+        <strong>Por favor, volve a probar con otro termino.</strong>
+        <p>
+            Los datos que estas buscando no existen o no se pueden encontrar de esta manera. Tambien puede ser que no tengas acceso. Ponete en contacto con el administrador de tu cuenta o busca con otra palabra clave.
+        </p>
+        <a href="{{pathFor 'home'}}" class="btn btn-xs btn-success">Volver al panel</a>
+    </div>
+
+</template>

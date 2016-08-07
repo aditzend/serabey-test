@@ -1,0 +1,87 @@
+<template name="LEGACYContact_show">
+
+    {{#if rel}}
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+
+      <div class='component-colored-info'>
+        <h4 class='text-uppercase'>
+          Contactos
+        </h4>
+        <div class=''>
+          {{#each rel}}
+
+          {{#with contact origin}}
+
+              <div class='well well-clickable well-sm {{#if deleting}}shake{{/if}}' id='{{_id}}' data-action='show-profile'>
+
+                <div class='row'>
+                  <div class='col-xs-12 col-md-12 col-lg-12'>
+                    {{#if deleting}}
+                      <div class='text-right'>
+                        <button class='btn btn-danger shadow' data-action='delete-item'> X </button>
+                      </div>
+                    {{/if}}
+                    <p class='text-right'>{{> Birthday_show}}
+                    {{#if formalTreatment}}
+                      <span class='label label-warning text-right'>FORMAL</span>
+                    {{/if}}</p>
+                    <h4 class='text-info'>
+                  {{treatedAs}}
+                </h4>
+
+                  <p class='text'>{{relNotes}}</p>
+
+                  <p class='text-muted'>
+                    <small class='text-muted'>
+                      {{#if getGender isMale}}
+                        <i class='fa fa-male'> </i>{{else}}
+                        <i class='fa fa-female'> </i>
+                      {{/if}}
+
+
+                    </small>
+                    {{name}} {{middleName}} {{lastName}}</p>
+
+                  </div>
+                </div>
+                <div class='row'>
+                  <div class='col-xs-4 col-md-4 col-lg-4 text-center'>
+                    {{#if email}}
+
+                      <a class='btn btn-lg btn-primary' href='mailto:{{email}}' data-action='click-override'>
+                        <i class='fa fa-envelope'></i>
+                      </a>
+
+                    {{/if}}
+
+                  </div>
+                  <div class='col-xs-4 col-md-4 col-lg-4 text-center'>
+
+                    {{#if mobile}}
+                      <a class='btn btn-lg btn-primary' href='tel:{{mobile}}' data-action='click-override'>
+                        <i class='fa fa-whatsapp'></i>
+                      </a>
+                    {{/if}}
+
+                  </div>
+                  <div class='col-xs-4 col-md-4 col-lg-4 text-center'>
+
+                    {{#if phone}}
+                      <a class='btn btn-lg btn-primary' href='tel:{{phone}}' data-action='click-override'>
+                        <i class='fa fa-phone'></i>
+                      </a>
+                    {{/if}}
+
+                  </div>
+
+                </div>
+              </div>
+              {{/with}}
+
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    {{/if}}
+</template>

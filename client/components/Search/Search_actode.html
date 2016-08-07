@@ -1,0 +1,68 @@
+<!-- <template name="Search_actode">
+
+    <div class="input-group input-group-lg">
+      {{#EasySearch.IfInputEmpty index=index }}
+
+        <span class="input-group-addon" id="sizing-addon1">
+          <i class="fa fa-search"></i>
+        </span>
+        {{else}}
+        {{#if resultsCount}}
+          {{#if oneFound}}
+            <span class="input-group-addon" id="sizing-addon1">
+              <i class="fa fa-thumbs-up"></i>
+            </span>
+            {{else}}
+            <span class="input-group-addon" id="sizing-addon1">{{resultsCount}}
+              <i class="fa fa-user"></i>
+            </span>
+          {{/if}}
+        {{/if}}
+      {{/EasySearch.IfInputEmpty}}
+      {{#EasySearch.IfSearching index=index }}
+        <span class="input-group-addon" id="sizing-addon1">
+          <i class="fa fa-cog spinning"></i>
+        </span>
+      {{/EasySearch.IfSearching }}
+      {{#EasySearch.IfNoResults index=index}}
+        <span class="input-group-addon" id="sizing-addon1">
+          <i class="fa fa-remove"></i>
+        </span>
+      {{/EasySearch.IfNoResults}}
+
+
+
+
+      {{> EasySearch.Input index=index attributes=inputAttributes noDocumentsOnEmpty='true' }}
+
+
+
+
+    </div>
+    {{#EasySearch.IfNoResults index=index }}
+    <br>
+      <div class="padded no-results">Sin resultados</div>
+      <br>
+    {{/EasySearch.IfNoResults }}
+
+    {{#EasySearch.Each index=index }}
+      {{#if oneFound}}
+        {{> Search_fast_result}}
+        {{else}}
+        {{> actodeListItem}}
+      {{/if}}
+    {{/EasySearch.Each}}
+
+
+
+</template> -->
+
+<!--<ul class="list-group appear-third">
+  {{#EasySearch.Each index=index }}
+    {{#if oneFound}}
+      {{> Search_fast_result}}
+      {{else}}
+      {{> actodeListItem}}
+    {{/if}}
+  {{/EasySearch.Each}}
+</ul>-->

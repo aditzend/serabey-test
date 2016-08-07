@@ -1,0 +1,32 @@
+<template name="actodeListItem">
+  <a href="../show-{{actodeType}}/{{_id}}">
+  <div class="panel-body note-link">
+
+                                {{#if treatedAs}}
+                                 {{treatedAs}}
+                                {{else}}
+                                  {{name}}
+                                {{/if}}
+                          </div>
+                        </a>
+
+</template>
+
+
+
+<!--<li data-action="actode-item" class="list-group-item {{selected}}" value="{{_id}}">
+  <a href='../show-{{actodeType}}/{{_id}}' >
+
+
+  <div class='well well-sm well-clickable'>
+      {{#if treatedAs}}
+       {{treatedAs}}
+      {{else}}
+        {{name}}
+      {{/if}}
+</div>
+</a>
+
+</li>
+{{#if isSelected}}
+{{/if}}-->

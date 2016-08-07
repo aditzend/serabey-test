@@ -1,0 +1,89 @@
+<template name="Place_create">
+  <div class="panel panel-default appear-second">
+    <div class="panel-heading">NUEVO LUGAR</div>
+    <div class="panel-body">
+      <form class="form" data-action="search">
+        <div class="form-group">
+          <label class='text-muted small-font' for="search">BUSCAR DIRECCI&Oacute;N :
+          </label>
+          <input class="form-control" id='addressInput' name='search' placeholder="Empeza a tipear y selecciona" type="text">
+          <br>
+          <button class="btn btn-primary" type="submit">BUSCAR</button>
+
+        </div>
+      </form>
+      <div class='map_canvas'></div>
+      <form data-action="result">
+        <div class="row ">
+          <div class="col-md-4 col-sm-4 col-xs-8">
+            <span class="help-block text-muted small-font text-center">CALLE</span>
+            <input class="form-control" name="route" id="route" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-4">
+            <span class="help-block text-muted small-font text-center">#</span>
+            <input class="form-control" name="street_number" id="street_number" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-4 col-xs-6 col-xs-offset-3">
+            <span class="help-block text-muted small-font text-center">CP</span>
+            <input class="form-control" name="postal_code" id="postal_code" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-6">
+            <span class="help-block text-muted small-font text-center">LAT</span>
+            <input class="form-control" name="lat"  id="lat" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-6">
+            <span class="help-block text-muted small-font text-center">LONG</span>
+            <input class="form-control" name="lng" id="lng" type="text"/>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <span class="help-block text-muted small-font text-center">LOCALIDAD</span>
+            <input class="form-control" name="locality" id="locality" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <span class="help-block text-muted small-font text-center">PARTIDO</span>
+            <input class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-5 col-xs-12">
+            <span class="help-block text-muted small-font text-center">PROVINCIA</span>
+            <input class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" type="text"/>
+          </div>
+          <div class="col-md-2 col-sm-5 col-xs-8">
+            <span class="help-block text-muted small-font text-center">PAIS</span>
+            <input class="form-control" name="country"  id="country" type="text"/>
+          </div>
+          <div class="col-md-1 col-sm-2 col-xs-4">
+            <span class="help-block text-muted small-font text-center">CODIGO</span>
+            <input class="form-control" name="country_short" id="country_short" type="text"/>
+          </div>
+        </div>
+        <hr>
+        <div class='row'>
+          <div class="col-md-6 col-sm-8 col-xs-12">
+            <span class="help-block small-font text-center">Este lugar es...</span>
+            <select class="form-control" id="placeType" name="placeType">
+              <option value='100'>la oficina principal.</option>
+              <option value='110'>una sucursal.</option>
+              <option value='200'>donde reciben mercader&iacute;a.</option>
+              <option value='300'>donde se retiran los pagos.</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class='row'>
+          <div class="col-md-6 col-sm-8 col-xs-12">
+            <input class='form-control' placeholder=" 'Entrada muy empinada', 'Timbre B', ' 2 A'" type="textarea" name="notes" id="notes">
+          </div>
+        </div>
+        <br>
+        <div class='row'>
+          <div class="col-md-4 col-md-offset-4">
+            <button class="btn btn-success" type="submit">CREAR</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</template>

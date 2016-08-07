@@ -1,0 +1,69 @@
+<template name="afContact_create">
+  <br>
+  <div class='panel panel-default'>
+
+    <div class='panel-heading'>
+      NUEVO CONTACTO
+    </div>
+    <div class='panel-body'>
+    {{# autoForm collection='Actodes' id='insertContactForm' type='insert'}}
+      <fieldset>
+        {{#momentum plugin='fade'}}
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='name'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='middleName'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='lastName'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='treatedAs'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='isMale'}}
+            </div>
+            <hr>
+            <p>Cumplea&ntilde;os</p>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bDayOfMonth' options= dayOfMonthOptions}}
+              </div>
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bMonth' options= monthOptions}}
+              </div>
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bYear' options= bYearOptions}}
+              </div>
+            </div>
+
+            <hr>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='formalTreatment'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='email'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='mobile'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='phone'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='internalPhone'}}
+            </div>
+
+        </div>
+        {{/momentum}}
+      </fieldset>
+      <button type='submit' class='btn btn-primary'>CREAR</button>
+      <div id="summary">
+        resumen
+      </div>
+    {{/autoForm}}
+</div>
+  </div>
+</template>

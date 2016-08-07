@@ -1,0 +1,63 @@
+<template name="LEGACY-Contact_edit">
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>
+      EDITAR CONTACTO
+    </div>
+
+    <div class='panel-body' >
+<form role='form' data-action='save-edit'>
+      <div class='checkbox'>
+        <label>
+            <input type="checkbox"  name='isMale' id='isMale' {{checkIfMale}}  > Hombre
+</label>
+      </div>
+      <div class="input-group">
+        <label for='name'>Nombre:</label>
+        <input id='name' type="text" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1" value='{{name}}'>
+      </div>
+      <div class="input-group">
+        <label for='middleName'>Segundo Nombre:</label>
+        <input id='middleName' type="text" class="form-control" placeholder=" Segundo Nombre" aria-describedby="basic-addon1" value='{{middleName}}'>
+      </div>
+      <div class="input-group">
+        <label for='lastName'>Apellido:</label>
+        <input id='lastName' type="text" class="form-control" placeholder="Apellido" aria-describedby="basic-addon1" value='{{lastName}}'>
+      </div>
+      <div class="input-group">
+        <label for='treatedAs'>Tratamiento:</label>
+        <input id='treatedAs' type="text" class="form-control" placeholder=" 'Ing. Gonzalez', 'Dra. Vega' " aria-describedby="basic-addon1" value='{{treatedAs}}'>
+      </div>
+      <div class="checkbox">
+          <label>
+              <input type="checkbox"  name='formalTreatment' id='formalTreatment' {{checkIfFormal}}  > Se trata de Ud.
+            </label>
+      </div>
+      <div class="input-group">
+        <label for='birthMoment'>Fecha de Nacimiento:</label>
+        <p class='text-muted'> A&ntilde;o-Mes-D&iacute;aT</p>
+        <input id='birthMoment' type="text" class="form-control" placeholder=" 5000 significa, no se el año " aria-describedby="basic-addon1" value='{{birthMoment}}'>
+      </div>
+
+      <div class="input-group">
+        <label for='email'>Email:</label>
+        <input id='email' type="text" class="form-control" placeholder=" 'usuario@server.com' " aria-describedby="basic-addon1" value='{{email}}'>
+      </div>
+      <div class="input-group">
+        <label for='mobile'>Celular:</label>
+        <input id='mobile' type="text" class="form-control" placeholder=" '11 6013 4585' " aria-describedby="basic-addon1" value='{{mobile}}'>
+      </div>
+      <div class="input-group">
+        <label for='phone'>L&iacute;nea:</label>
+        <input id='phone' type="text" class="form-control" placeholder=" '02323471691' " aria-describedby="basic-addon1" value='{{phone}}'>
+      </div>
+      <div class="input-group">
+        <label for='internalPhone'>Interno:</label>
+        <input id='internalPhone' type="text" class="form-control" placeholder=" '23' " aria-describedby="basic-addon1" value='{{internalPhone}}'>
+      </div>
+
+      <br>
+      <button class='btn btn-success' type='submit' >GUARDAR</button>
+    </form>
+    </div>
+  </div>
+</template>

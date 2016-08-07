@@ -1,0 +1,81 @@
+
+
+<template name="Dashboard">
+
+    {{#staggering}}
+
+        <div class="wrapper">
+          
+
+
+            {{#pageTitle title="Panel de Control Principal"}}
+            <h2> 
+              <!-- {{#if companyLogo}}
+              <img src="{{companyLogo}}" alt="" />
+              {{else}} -->
+              {{companyName}}
+              <!-- {{/if}} -->
+             </h2>
+
+            {{/pageTitle}}
+      
+
+
+
+
+            <div class="row">
+              
+              <div class='col col-lg-2'>
+                <!-- <a class="btn btn-success" href={{pathForCreateOrder}}>{{_ "New order"}}</a> -->
+                <!-- <a class="btn btn-success" href={{pathForCreateExpense}}>{{_ "New expense"}}</a> -->
+                <!-- <a class="btn btn-default" href={{pathForShowTreasury}}>{{_ "Treasury"}}</a> -->
+              </div>
+        
+    
+      
+        
+        <!--         <div class="col-lg-3">
+        
+            {{#panel footer="Estado de Genericos"}}
+        
+            {{> Generics_show}}
+        
+            {{/panel}}
+        
+        </div>
+        <div class="col-lg-3">
+        
+            {{#panel footer="This is standard panel footer" panelClass="stats"}}
+        
+              {{> Birthday_widget}}
+            {{/panel}}
+        
+        </div> -->
+
+                <div class="col-lg-4">
+                    <!-- {{> Customers_panel}} -->
+                </div>
+                <!-- <div class="col-lg-4">
+                    {{> Vendors_panel}}
+                </div> -->
+                <div class="col-lg-4">
+                    {{> Orders_panel}}
+                </div>
+                <!-- <div class="col-lg-4">
+                    {{> Items_panel}}
+                </div> -->
+                <div class="col-lg-4">
+                  {{> SalesPerformance_panel}}
+                  
+                </div>
+                <div class="col-lg-4">
+                  {{#if isCompanyAdmin}}
+                    {{> ValidateWorkerRels}}
+                  {{/if}}
+                  
+                </div>
+            </div>
+          
+        </div>
+    {{/staggering}}
+</template>

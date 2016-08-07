@@ -1,0 +1,33 @@
+<template name="Rel_show">
+  <div class='col-xs-12 col-md-6 col-lg-3'>
+    {{#if rel}}
+      <h4 class='text-uppercase'>Comentarios
+      </h4>
+      {{#with rel}}
+      {{#momentum plugin='fade'}}
+        {{#if editingId thisId}}
+          {{> Rel_edit}}
+        {{else}}
+                  <div class='well well-sm' data-action='edit' >
+                    <p class='text-right'><span class='label label-default'>{{relTypeTranslate getRelType}}</span></p>
+
+                    <p>{{notes}}</p>
+                    {{#if paymentNotes}}
+                        <p>
+                          <i class='fa fa-credit-card'></i>
+                          {{paymentDays}}
+                          {{paymentTerms}}
+                          {{paymentNotes}}
+                        </p>
+                      {{/if}}
+                    </div>
+
+        {{/if}}
+        {{/momentum}}
+        {{/with}}
+
+    {{else}}
+        {{>Rel_create}}
+    {{/if}}
+  </div>
+</template>

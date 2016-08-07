@@ -1,0 +1,58 @@
+<template name="Search_fast_result">
+<li class='h-bg-yellow search-fast-result'>
+    <!-- FAST VIEW, NOT PROFILE, USER HAS TO CLICK ON THE NAME TO GO TO PROFILE PAGE OR PRESS ENTER -->
+    <!-- <a href='/show-{{actodeType}}/{{rel.destiny}}?relType={{rel.type}}'> -->
+    <a href='#'>
+        <div class="panel-body note-link">
+            {{#if cont}}
+                <h3>{{cont.treatedAs}}</h3>
+                {{#if cont.formalTreatment}}
+                    <span class='label label-default pull-right'>FORMAL</span>
+                {{/if}}
+                  <h5>  <span class='text '>
+                            {{#if isMale}}
+                                <i class='fa fa-male'></i>
+                            {{else}}
+                                <i class='fa fa-female'></i>
+                            {{/if}}
+                    </span>{{name}} {{lastName}}</h5>
+                    <hr>
+          
+                <!-- <div class='row'>
+                    <div class='col-xs-2 col-md-2 col-lg-2'>
+                        <span class='text '>
+                                {{#if isMale}}
+                                    <i class='fa fa-male'></i>
+                                {{else}}
+                                    <i class='fa fa-female'></i>
+                                {{/if}}
+                        </span>
+                    </div>
+
+                    <div class='col-xs-10 col-md-10 col-lg-10'> -->
+                        {{#if email}}
+                            <a class='btn btn-sm btn-default' href='mailto:{{email}}' data-action='email'>
+                                <i class='fa fa-envelope'></i>
+                                Mandarle un mail
+                            </a>
+
+                        {{/if}}
+                        {{#if mobile}}
+                            <a class='btn btn-sm btn-default' href='tel:{{mobile}}' data-action='email'>
+                                <i class='fa fa-mobile-phone'></i>
+                                {{mobile}}
+                            </a>
+0167777100052033196245
+                        {{/if}}
+<!-- 
+                    </div>
+              
+
+                </div> -->
+            {{/if}}
+
+        </div>
+    </a>
+</li>
+
+</template>

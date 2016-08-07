@@ -1,0 +1,33 @@
+<template name="Generic_show">
+  {{#with generic}}
+    <div class="panel panel-default appear-first">
+      <div class="panel-heading">{{es_name}}</div>
+      <div class="panel-body">
+        <form data-action='createGenericForm'>
+          <div class="form-group">
+            <h3> Este Gen&eacute;rico est&aacute; esperando validaci&oacute;n</h3>
+            <div class="input-group">
+              <label for="es_name">Palabras clave</label>
+              <input aria-describedby="basic-addon1" class="form-control" id='es_name' placeholder="Por ejemplo: 'PEAD PARA SOPLADO'" type="text" value={{es_keyword}}>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <label for="es_desc">Descripci&oacute;n</label>
+              <input aria-describedby="basic-addon1" class="form-control" id='es_desc' placeholder="Por ejemplo: 'Polietileno de alta densidad para usar en soplado de envases'" type="text" value={{es_desc}}>
+            </div>
+          </div>
+          <!--      <div class="form-group">
+          <div class="input-group">
+            <label for="globalCode">C&oacute;digo Global </label>
+            <p class='text-info'> Este va a ser el c&oacute;digo internacional para este gen&eacute;rico. Por eso debe estar en ingl&eacute;s.</p>
+            <input id='globalCode' type="text" class="form-control" placeholder="Por ejemplo : 'PEADBLOW'" aria-describedby="basic-addon1">
+          </div>
+        </div>-->
+          <!--<button class="btn btn-default" type="submit">CREAR</button>-->
+        </form>
+      </div>
+    </div>
+
+  {{/with}}
+</template>

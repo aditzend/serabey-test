@@ -1,0 +1,36 @@
+<template name="Generics_show">
+
+
+  {{#panel title="This is a striped table design" footer="Table - 5 rows"}}
+
+                        <div class="table-responsive">
+                            <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Palabras Clave</th>
+                                    <th>Descripci&oacute;n</th>
+                                    <th>
+                                      Validado
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                  {{#each generics}}
+                                <tr>
+                                    <td>{{ar_name}}</td>
+                                    <td>{{ar_keyword}}</td>
+                                    <td>{{ar_desc}}</td>
+                                    <td>
+                                      {{#if valid}}SI{{else}}NO{{/if}}
+                                    </td>
+                                </tr>
+                                {{/each}}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    {{/panel}}
+</template>

@@ -1,0 +1,35 @@
+<template name="Generic_create">
+  <div class="panel panel-default appear-first">
+    <div class="panel-heading">NUEVO GENERICO</div>
+    <div class="panel-body">
+      <form data-action='createGenericForm'>
+        <div class="form-group">
+          <div class="input-group">
+            <label for="es_name">Nombre</label>
+            <input id='es_name' type="text" class="form-control" placeholder="Por ejemplo: 'PEAD PARA SOPLADO'" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label for="es_keyword">Palabras Clave</label>
+            <input id='es_keyword' type="text" class="form-control" placeholder="Por ejemplo: 'pead,soplado,polietileno alta densidad'" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label for="es_desc">Descripci&oacute;n</label>
+            <input id='es_desc' type="text" class="form-control" placeholder="Por ejemplo: 'Polietileno de alta densidad para usar en soplado de envases'" aria-describedby="basic-addon1">
+          </div>
+        </div>
+  <!--      <div class="form-group">
+          <div class="input-group">
+            <label for="globalCode">C&oacute;digo Global </label>
+            <p class='text-info'> Este va a ser el c&oacute;digo internacional para este gen&eacute;rico. Por eso debe estar en ingl&eacute;s.</p>
+            <input id='globalCode' type="text" class="form-control" placeholder="Por ejemplo : 'PEADBLOW'" aria-describedby="basic-addon1">
+          </div>
+        </div>-->
+        <button type="submit" class="btn btn-default">CREAR</button>
+      </form>
+    </div>
+  </div>
+</template>

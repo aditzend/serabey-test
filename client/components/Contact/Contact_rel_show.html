@@ -1,0 +1,31 @@
+<template name="Contact_rel_show">
+  {{#if editingId thisId}}
+    {{> Contact_rel_edit}}
+  {{else}}
+  <br>
+      <div class='well well-sm well-clickable {{#if deleting}}shake{{/if}}' data-action='edit-rel' >
+        {{#if deleting}}
+          <div class='text-right'>
+            <button class='btn btn-danger' data-action='delete-item'>X</button>
+          </div>
+        {{/if}}
+        <p class='text-left text-info'>
+          <!--<small>{{{convertPlaceTypeOption placeType}}}</small>-->
+          <small>{{relTypeTranslate type}}
+            DE {{destinyActode destiny}}
+          <!--  <a href='../show-{{actodeType destiny}}/{{destiny}}'>{{destinyActode destiny}}</a>-->
+          </small>
+        </p>
+        <div class='row'>
+          <div class='col-xs-8 col-md-8 col-lg-8'>
+            {{notes}}
+          </div>
+          <div class='col-xs-4 col-md-4 col-lg-4'>
+            {{#if phone}}
+              <a class='btn btn-lg btn-primary' href='tel:{{phone}}'></a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+  {{/if}}
+</template>

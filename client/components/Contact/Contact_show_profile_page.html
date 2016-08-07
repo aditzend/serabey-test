@@ -1,0 +1,66 @@
+<template name="Contact_show_profile_page">
+  
+    
+  {{#if Template.subscriptionsReady}}
+    <!-- {{> pageHeader title='Ver perfil' desc="Datos de la persona y normas de contacto"  category="App views" }} -->
+
+    {{#staggering}}
+
+    <div class="content">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="hpanel hgreen">
+                    <div class="panel-body">
+                        <div class="pull-right text-right">
+                            <div class="btn-group">
+                                <i class="fa fa-facebook btn btn-default btn-xs"></i>
+                                <i class="fa fa-twitter btn btn-default btn-xs"></i>
+                                <i class="fa fa-linkedin btn btn-default btn-xs"></i>
+                            </div>
+                        </div>
+                        <h3><a href="">{{person.name}} {{person.lastName}}</a></h3>
+                        <!-- <div class="text-muted font-bold m-b-xs">{{contactRel.position}} en {{companyName contactRel.destiny}}</div> -->
+                        {{> Birthday_show (showBirthdayArgs person.bDay person.bMonth person.bYear)}}
+
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-4 border-right">
+                                <div class="contact-stat"><span>Celular: </span> <strong>{{person.mobile}}</strong></div>
+                            </div>
+                            <div class="col-md-4 border-right">
+                                <div class="contact-stat"><span>Fijo: </span> <strong>{{person.phone}} {{person.internalPhone}}</strong></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="contact-stat"><span>Email: </span> <strong>{{person.email}}</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="panel-body">
+                             
+                            <h3><a href=""><i class='fa fa-user'> </i> {{#if contactRel.formalTreatment}} Tratar de Usted {{else}} Tratar de Vos {{/if}} como '{{contactRel.treatedAs}}'.</a></h3>
+                        
+                              <h3><a href=""><i class='fa fa-briefcase'> </i> Es {{contactRel.position}} en {{companyName contactRel.destiny}}.</a></h3>
+                          
+                      
+                    </div>
+                  
+
+                </div>
+            </div>
+        
+        
+        </div>
+
+    </div>
+
+    {{/staggering}}
+    
+    {{else}}
+      Cargando...
+{{/if}}
+
+
+</template>

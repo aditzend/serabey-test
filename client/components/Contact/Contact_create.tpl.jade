@@ -1,0 +1,93 @@
+form(data-action='form')
+  .row
+    .col-xs-12
+      .form-group
+        label.control-label(for='name') Nombre
+        input#nameInput.form-control(data-action='nameInput', name='name', type='text')
+        span.form-control-feedback
+        span.help-block
+    .col-xs-12
+      .form-group
+        label.control-label(for='middleName') Segundo Nombre
+        input#middleNameInput.form-control(data-action='middleNameInput', name='middleName', type='text')
+        span.form-control-feedback
+        span.help-block
+    .col-xs-12
+      .form-group
+        label.control-label(for='lastName') Apellido
+        input#lastNameInput.form-control(data-action='lastNameInput', name='lastName', type='text')
+        span.form-control-feedback
+        span.help-block
+    .col-xs-12
+      .form-group
+        label.control-label(for='treatedAs') Tratamiento
+        input#treatedAsInput.form-control(data-action='treatedAsInput', name='treatedAs', placeholder=" 'Sr. Gonzalez' , 'Dra. Jimenez', 'Marcos'", type='text')
+        span.form-control-feedback
+        span.help-block
+    .checkbox.col-xs-12
+      label
+        input#formalTreatmentInput(type='checkbox')
+        |               Se trata de Ud.
+    .col-xs-12
+      label.control-label(for='isMale') Genero
+      select#isMaleInput.form-control
+        option(selected='', value = '1') Hombre
+        option(value='0') Mujer
+    .col-xs-12
+      .form-group
+        label.control-label(for='email') Email
+        input#emailInput.form-control(data-action='emailInput', name='email', placeholder=" 'usr@gmail.com' ", type='email')
+        span.form-control-feedback
+        span.help-block    
+    .col-xs-12
+      .row
+        .col-xs-12
+          label Cumplea&ntilde;os
+      .row
+        .col-xs-4
+          .form-group
+            label.control-label(for='bDay') Día
+            select#bDayInput.form-control(data-action='bDayInput', name='bDay', type='text')
+            span.form-control-feedback
+            span.help-block
+        .col-xs-4
+            label.control-label(for='bMonth') Mes
+            select#bMonthInput.form-control(data-action='bMonthInput', name='bMonth', type='text')
+            span.form-control-feedback
+            span.help-block
+        .col-xs-4
+          .form-group
+            label.control-label(for='bYear') Año
+            select#bYearInput.form-control(data-action='bYearInput', name='bYear', type='text')
+            span.form-control-feedback
+            span.help-block
+  .row
+    .col-xs-12
+      h3
+        | Teléfonos
+      span.text-muted Si no son de Argentina, colocar el código de país, p. Ej. : Para Brasil ' + 55 '
+    .col-xs-12
+      .form-group
+        label.control-label(for='mobile') Celular
+        input#mobileInput.form-control(data-action='mobileInput', name='mobile', placeholder=" '11-6013-1234' ", type='text')
+        span.form-control-feedback
+        span.help-block
+    .col-xs-12
+      .form-group
+        label.control-label(for='phone') Teléfono de Línea
+        #phoneExplanation
+        input#phoneInput.form-control(data-action='phoneInput', name='phone', placeholder=" '02323-471-691' ", type='text')
+        span.form-control-feedback
+        span.help-block
+    .col-xs-12
+      .form-group
+        label.control-label(for='internalPhone') Interno
+        input#internalPhoneInput.form-control(data-action='internalPhoneInput', name='internalPhone', placeholder=" '3120' ", type='text')
+        span.form-control-feedback
+        span.help-block
+  .row        
+    .col-xs-12
+      hr
+      button.btn.btn-success(type='submit') CREAR
+      br
+      span#summary.label.label-warning

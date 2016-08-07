@@ -1,0 +1,17 @@
+<template name="TooDetailShow">
+  
+
+    <tr class='{{rowState}} js-select-row'>
+  <td >{{detail.itemName}}</td>
+  <td >{{detail.amount}} un</td>
+  <td > $ {{detail.price}} {{detail.currency}}</td>
+  <td >{{detail.discount}} %</td>
+  <td >{{detail.taxes}} %</td>
+  <td class='total'>{{total detail.amount detail.price detail.discount detail.taxes}}</td>
+  <td>
+    {{#if selected}}
+    <button class='btn btn-danger js-delete-detail' id='{{detail.orderDetailId}}'><i class='fa fa-trash-o'></i></button>
+    <!-- <button class='btn btn-default js-edit-detail' id='{{detail._id}}'><i class='fa fa-pencil'></i></button> -->
+  {{/if}}</td>
+  </tr>
+</template>

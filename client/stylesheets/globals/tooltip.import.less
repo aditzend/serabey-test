@@ -1,0 +1,32 @@
+// tooltip
+// .tooltip-inner {
+//   background-color: @color-navy-blue;
+// }
+//
+// .tooltip.top .tooltip-arrow {
+//   border-top-color: @color-navy-blue;
+// }
+// .tooltip.right .tooltip-arrow {
+//   border-right-color: @color-navy-blue;
+// }
+// .tooltip.bottom .tooltip-arrow {
+//   border-bottom-color: @color-navy-blue;
+// }
+// .tooltip.left .tooltip-arrow {
+//   border-left-color: @color-navy-blue;
+// }
+
+.tooltip {
+  z-index: 1001;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+  opacity: 0;
+}
+
+.tooltip.hide {
+  opacity: 0;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
