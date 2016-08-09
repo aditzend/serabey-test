@@ -4,6 +4,7 @@ import '../../api/controlling/profit-centers/profit-centers.js';
 import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
 import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/orders/orders.js';
+import '../../api/deliveries/deliveries.js';
 import '../../api/payment-methods/payment-methods.js';
 import '../../api/orders/details/details.js';
 import '../../api/companies/companies.js';
@@ -25,6 +26,7 @@ import '../../api/companies/methods.js';
 import '../../api/emails/methods.js';
 import '../../api/persons/methods.js';
 import '../../api/orders/methods.js';
+import '../../api/deliveries/methods.js';
 import '../../api/orders/details/methods.js';
 
 //publications
@@ -32,6 +34,7 @@ import '../../api/accounting/accounts/server/publications.js';
 import '../../api/controlling/profit-centers/server/publications.js';
 import '../../api/transfers/transfers-of-ownership/server/publications.js';
 import '../../api/orders/server/publications.js';
+import '../../api/deliveries/server/publications.js';
 import '../../api/payment-methods/server/publications.js';
 import '../../api/transfers/transfers-of-ownership/details/server/publications.js';
 import '../../api/orders/details/server/publications.js';

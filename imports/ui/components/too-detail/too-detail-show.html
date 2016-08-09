@@ -1,7 +1,25 @@
 <template name="TooDetailShow">
   
 
-    <tr class='{{rowState}} js-select-row'>
+    <li class='{{rowState}} js-select-row list-group-item'>
+  <h5> <span class='text-info'>{{detail.itemName}} </span><small></small></h5> 
+  <div>
+    <small class='text-muted'> {{_ "Amount"}}: </small>
+   <span class='text-info'>{{detail.amount}}un  </span>
+  </div>
+   <small class='text-muted'> {{_ "Price"}}: </small>
+   <span class='text-info'>$ {{detail.price}} {{detail.currency}}  </span><small class='text-muted'> {{_ "Discount"}}: </small>
+  <span class='text-info'>{{detail.discount}} %  </span><small class='text-muted'> {{_ "Tax"}}: </small>
+  <span class='text-info'>{{detail.taxes}} % </span>
+  <small class='text-muted'> {{_ "Total"}}: </small>
+<span class='text-info'>{{total detail.amount detail.price detail.discount detail.taxes}} </span>
+
+    {{#if selected}}
+    <button class='btn btn-danger js-delete-detail' id='{{detail.orderDetailId}}'><i class='fa fa-trash-o'></i></button>
+    <!-- <button class='btn btn-default js-edit-detail' id='{{detail._id}}'><i class='fa fa-pencil'></i></button> -->
+  {{/if}}
+
+    <!-- <tr class='{{rowState}} js-select-row'>
   <td >{{detail.itemName}}</td>
   <td >{{detail.amount}} un</td>
   <td > $ {{detail.price}} {{detail.currency}}</td>
@@ -11,7 +29,6 @@
   <td>
     {{#if selected}}
     <button class='btn btn-danger js-delete-detail' id='{{detail.orderDetailId}}'><i class='fa fa-trash-o'></i></button>
-    <!-- <button class='btn btn-default js-edit-detail' id='{{detail._id}}'><i class='fa fa-pencil'></i></button> -->
-  {{/if}}</td>
-  </tr>
+    <button class='btn btn-default js-edit-detail' id='{{detail._id}}'><i class='fa fa-pencil'></i></button> 
+  {{/if}}--></li>
 </template>

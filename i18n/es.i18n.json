@@ -58,7 +58,22 @@
       "Order":"Order",
       "Specs":"Especificaciones",
       "Grand total": "Total general",
-      "Order": "Orden"
+      "Order": "Orden",
+      "Orders": "Ordenes",
+      "Invalid date": "Fecha inválida",
+      "Profile": "Perfil",
+      "Complete your job profile": "Completá tus datos laborales",
+      "Create a position": "Nuevo trabajo",
+      "New order": "Nueva orden",
+      "Last orders": "Ultimas órdenes",
+      "Search orders": "Buscar órdenes",
+      "Cliente": "Customer",
+      "Files": "Archivos",
+      "Details": "Detalles",
+      "Add item": "Agregar item",
+      "Deliveries": "Entregas",
+      "New delivery": "Nueva entrega"
+      
       
       
       

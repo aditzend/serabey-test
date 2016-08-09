@@ -1,27 +1,41 @@
 <template name="TooDetailEdit">
-  <tr class=''>
-      <td >{{product}}</td>
-      <td >
-          <input class='js-amount' type="number">
-      </td>
-      <td >
-          <input class='js-price' type="number">
-      </td>
-      <td >
-          <input class='js-discount' type="number">
-      </td>
-      <td >
-          <input class='js-taxes' type="number">
-      </td>
-      <td >
-          
-      </td>
-      <td >
-          <button class='btn btn-success js-add-item'>{{_ "Ok"}}</button>
-      </td>
-      <td >
-          <button class='btn btn-danger js-cancel-item'>{{_ "Cancel"}}</button>
-      </td>
 
-  </tr>
+      {{product}}
+      <div class='input-group'>
+        <label for='deliveryDate'>{{_ "Delivery date"}}</label>
+            <input name='deliveryDate' class='form-control js-delivery-date' type="date">
+      </div>
+      <div class='input-group'>
+        <label for='amount'>{{_ "Amount"}}</label>
+          <input name='amount' class='form-control js-amount' type="number">
+        </div>
+        <div class='input-group'>
+      
+      <label for='price'>{{_ "Price"}}</label>
+          <input name='price' class='form-control js-price' type="number">
+        </div>
+          
+          <div class='input-group'>
+      
+      <label for='discount'>{{_ "Discount"}}</label>
+          <input name='discount' class='form-control js-discount' type="number">
+        </div>
+          
+          <div class='input-group'>
+      
+      <label for='taxes'>{{_ "Taxes"}}</label>
+          <input name='taxes' class='form-control js-taxes' type="number">
+      
+        </div>
+      
+          
+      
+      
+          <button class='btn btn-success js-add-item'>{{_ "Ok"}}</button>
+      
+      
+          <button class='btn btn-danger js-cancel-item'>{{_ "Cancel"}}</button>
+      
+
+  
 </template>

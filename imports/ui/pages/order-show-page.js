@@ -27,15 +27,18 @@ Template.Order_show_page.onCreated(function() {
         sellingItemName: false,
         sellingItemId: false,
         sellingItemName: false,
+        editingDeliveryId:false,
         grandTotal: false,
         dateDefined: false,
-        uploadingFile: false
+        uploadingFile: false,
+        addingOrderDetail:false
     });
 
     this.autorun(() => {
 
         let orderSubscription = this.subscribe('Orders.test');
         let orderDetailSubscription = this.subscribe('OrderDetails.test');
+        let deliveriesSubscription = this.subscribe('Deliveries.test');
         let customerRelSubscription = this.subscribe('customerRels', Session.get('workfor'));
         // let paymentMethodSubscription = this.subscribe('PaymentMethods.test');
         FlowRouter.watchPathChange();
@@ -115,6 +118,58 @@ Template.Order_show_page.onRendered(function() {
 });
 
 Template.Order_show_page.helpers({
+  addingOrderDetail() {
+    const instance = Template.instance();
+    
+    return instance.state.get('addingOrderDetail');
+  },
+  editingDelivery() {
+    const instance = Template.instance();
+    
+    return Deliveries.findOne({_id:instance.state.get('editingDeliveryId')});
+  },
+  plusOne(string) {
+    return 1+ Number(string);
+  },
+  creatingDelivery() {
+    const instance = Template.instance();
+    return instance.state.get('editingDeliveryId');
+  },
+  sumAllDeliveries(deliveries) {
+
+    for (i=0, len = deliveries.length, sum = 0; i < len; i++){
+      sum += Number(deliveries[i].amount);
+      //console.log("sum is now", sum);
+      
+    };
+    return sum;
+    
+    
+    
+    //return deliveries.length;
+  },
+  remainingDeliveries(amount,deliveries) {
+
+    for (i=0, len = deliveries.length, sum = 0; i < len; i++){
+      sum += Number(deliveries[i].amount);
+      //console.log("sum is now", sum);
+      
+    };
+    return amount - sum;
+    
+    
+    
+    //return deliveries.length;
+  },
+  formatAsNumber(number) {
+    return numeral(number).format('0,0');
+  },
+  diff(alfa,bravo) {
+    const a = numeral(alfa);
+    const b = numeral(bravo);
+    return a.subtract(b).format('0,0');
+  },
+
 
 
     uploadingFile() {
@@ -353,7 +408,7 @@ Template.Order_show_page.helpers({
 
     },
 
-    timeFromOrderCreation(createdAt) {
+    timeFromCreation(createdAt) {
     
         return moment(createdAt).fromNow();
     
@@ -466,6 +521,9 @@ Template.Order_show_page.helpers({
 });
 
 Template.Order_show_page.events({
+  'click .js-add-order-detail': function(e,instance) {
+    instance.state.set('addingOrderDetail',true);
+  },
     'click .js-save-sale': function(e, instance) {
 
         FlowRouter.go('home');
@@ -606,6 +664,52 @@ Template.Order_show_page.events({
         instance.state.set('invoiceType', invoiceType);
 
 
+    },
+    'click .js-add-item-to-delivery': function(e,instance) {
+      console.log("index", e.target.id);
+      Meteor.call('addDeliveryItemToOrder',instance.state.get('orderId'),e.target.id,100)
+      ;
+  
+      
+    },
+    'submit .js-add-item-to-delivery-form': function(e,instance) {
+      e.preventDefault();
+      const item = {itemId:e.target.id,
+                    itemName:e.target.name,
+                    packaging:e.target.packaging.value,
+                    amount:e.target.amount.value};
+      console.log("amount", e.target.amount.value);
+      Meteor.call('addDeliveryItemToOrder',instance.state.get('orderId'),e.target.id,e.target.amount.value,e.target.packaging.value)
+      ;
+      Meteor.call('updateDelivery',instance.state.get('editingDeliveryId'),item);
+      
+    },
+    'click .js-create-delivery': function(e,instance) {
+  
+      
+      Meteor.call('createDelivery',
+      instance.state.get('orderId'),
+    instance.state.get('company'),
+    function (err,res) {
+      if (err) {
+        console.log("ERROR", err);
+      }
+      else{
+        console.log("new delivery ",res);
+        instance.state.set('editingDeliveryId',res);
+        Meteor.call('propagateDeliveryToOrder',
+        instance.state.get('orderId'),
+      res
+    );
+        
+      }
+    }
+    
+  );
+  
+  
+      
+      
     },
     'click .js-goto-upload-file': function(e, instance) {
         instance.state.set('uploadingFile', true);

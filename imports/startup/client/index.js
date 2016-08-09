@@ -8,6 +8,7 @@ import '../../api/controlling/profit-centers/profit-centers.js';
 import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
 import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/orders/orders.js';
+import '../../api/deliveries/deliveries.js';
 import '../../api/payment-methods/payment-methods.js';
 import '../../api/orders/details/details.js';
 import '../../api/rels/rels.js';
@@ -27,6 +28,7 @@ import '../../api/rels/methods.js';
 import '../../api/emails/methods.js';
 import '../../api/persons/methods.js';
 import '../../api/orders/methods.js';
+import '../../api/deliveries/methods.js';
 import '../../api/orders/details/methods.js';
 
 import '../../api/companies/methods.js';
