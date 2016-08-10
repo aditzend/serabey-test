@@ -24,6 +24,7 @@ import '../../ui/pages/order-new-page.js';
 import '../../ui/pages/order-show-page.js';
 import '../../ui/pages/expense-new-page.js';
 import '../../ui/pages/test-landing-options.js';
+import '../../ui/pages/create-admin-page.js';
 import '../../ui/layouts/landing-layout.html';
 import '../../ui/specs/specs-home.html';
 
@@ -41,6 +42,15 @@ FlowRouter.route('/onloggedin', {
         }
 
     }
+});
+FlowRouter.route('/create-admin/',{
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  name: 'createAdmin',
+  action() {
+    BlazeLayout.render('App_body', {
+      main: 'Create_admin_page'
+    });
+  }
 });
 //---------------------------------------------------------------
 FlowRouter.route('/show-treasury/', {

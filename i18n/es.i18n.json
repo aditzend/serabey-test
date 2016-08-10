@@ -68,11 +68,20 @@
       "Last orders": "Ultimas órdenes",
       "Search orders": "Buscar órdenes",
       "Cliente": "Customer",
+      "Awaiting validation": "Esperando validación",
+      "Create another position": "Crear otro trabajo",
       "Files": "Archivos",
       "Details": "Detalles",
       "Add item": "Agregar item",
       "Deliveries": "Entregas",
-      "New delivery": "Nueva entrega"
+      "New delivery": "Nueva entrega",
+      "Validate jobs": "Validar puestos",
+      "New payment method": "Crear medio de pago",
+      "Payment method name": "Nombre",
+      "Payment method days": "Días",
+      "Save": "Crear",
+      "Cancel": "Cancelar"
+      
       
       
       

@@ -1,5 +1,5 @@
 <template name="PaymentMethodsPanel">
-
+{{#panel title='Metodo de pago' built=true}}
   
   <select class='form-control' id="category" name="category">
     {{#each paymentMethod in paymentMethods}}
@@ -10,7 +10,6 @@
   
   
   {{#if creatingMethod}}
-  show create 
   <div class='form'>
     <div class='form-group'>
       <label for='name'>{{_ "Payment method name"}}</label>
@@ -26,5 +25,6 @@
   <span class='btn btn-sm btn-default js-create-payment-method'>{{_ "New payment method"}}</span>
   
   {{/if}}
+  {{/panel}}
 </template>
 

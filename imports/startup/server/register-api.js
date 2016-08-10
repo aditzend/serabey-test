@@ -1,6 +1,7 @@
 //declarations
 import '../../api/accounting/accounts/accounts.js';
 import '../../api/controlling/profit-centers/profit-centers.js';
+import '../../api/controlling/cost-centers/cost-centers.js';
 import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
 import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/orders/orders.js';
@@ -32,6 +33,7 @@ import '../../api/orders/details/methods.js';
 //publications
 import '../../api/accounting/accounts/server/publications.js';
 import '../../api/controlling/profit-centers/server/publications.js';
+import '../../api/controlling/cost-centers/server/publications.js';
 import '../../api/transfers/transfers-of-ownership/server/publications.js';
 import '../../api/orders/server/publications.js';
 import '../../api/deliveries/server/publications.js';

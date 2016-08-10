@@ -18,8 +18,8 @@ Meteor.methods({
         console.log("creating admin...");
         let currentUser = Meteor.users.findOne(this.userId);
 
-        if (currentUser.isSuperAdmin) {
-            console.log("you are a super admin");
+        // if (currentUser.isSuperAdmin) {
+            // console.log("you are a super admin");
             Meteor.users.update({
                 _id: userId
             }, {
@@ -27,10 +27,10 @@ Meteor.methods({
                     admins: companyId
                 }
             });
-        } else {
-            console.log("ADMIN CREATED");
+        // } else {
+        //     console.log("ADMIN CREATED");
             //create a danger log or send an email to superadmin
-        }
+      //  }
     },
     'propagateWorkerRelToUser' (relId) {
         console.log("propagating worker rel to user...");

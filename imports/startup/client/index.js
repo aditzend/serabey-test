@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import '../../api/companies/companies.js';
 import '../../api/accounting/accounts/accounts.js';
 import '../../api/controlling/profit-centers/profit-centers.js';
+import '../../api/controlling/cost-centers/cost-centers.js';
 import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
 import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/orders/orders.js';
