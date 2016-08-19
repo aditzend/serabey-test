@@ -123,9 +123,9 @@ rzymek:moment-locale-es
 natestrauser:x-editable-bootstrap
 random
 mdg:validated-method
-jeremy:geocomplete
-dburles:google-maps
+#jeremy:geocomplete
+#dburles:google-maps
 email
 peerlibrary:reactive-publish
 tap:i18n
-#kadira:debug
+

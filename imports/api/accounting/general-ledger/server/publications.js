@@ -15,9 +15,11 @@ from 'meteor/meteor';
 //         }
 //     });
 // });
-Meteor.publish('Deliveries.test', function deliveriesTest() {
+Meteor.publish('GeneralLedger.own', function generalLedgerOwn(ownerId) {
     if (this.userId) {
-        return Deliveries.find();
+        return GeneralLedger.find({
+          owner: ownerId
+        });
     } else {
         this.ready();
     }

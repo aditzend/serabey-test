@@ -17,7 +17,7 @@ Template.Treasury_show_page.onCreated(function() {
 Template.Treasury_show_page.helpers({
     // workingFor() {
     //     const instance = Template.instance();
-    //     const companyId = Session.get('workfor');
+    //     const companyId = workforId();
     //     instance.autorun(() => {
     //         if (instance.subscriptionsReady()) {
     //             const company = Companies.findOne(companyId);
@@ -31,12 +31,12 @@ Template.Treasury_show_page.helpers({
     // 
     // 
     // },
-    workfor() {
-        const instance = Template.instance();
-        const companyId = Session.get('workfor');
-
-        return companyId;
-    },
+    // workfor() {
+    //     const instance = Template.instance();
+    //     const companyId = workforId();
+    // 
+    //     return companyId;
+    // },
     companyLogo(companyId) {
         const company = Companies.findOne(companyId);
         if (company) {

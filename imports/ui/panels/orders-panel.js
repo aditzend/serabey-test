@@ -3,7 +3,8 @@ import '../pages/orders-show-page.js';
 
 Template.Orders_panel.onCreated(function() {
   this.autorun( () => {
-    this.subscribe('Orders.test');
+    const w = workfor();
+    this.subscribe('Orders.own',w._id);
   });
 });
 

@@ -12,9 +12,9 @@ import '../components/rel/rel-vendor-edit.js';
 Template.Vendors_panel.onCreated(function() {
 
     this.autorun(() => {
-        this.subscribe('rels.vendors', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.vendors', workforId(), Session.get('workerRelId'));
+        this.subscribe('rels.places', workforId(), Session.get('workerRelId'));
+        this.subscribe('rels.contacts', workforId(), Session.get('workerRelId'));
         this.subscribe('persons.test');
         this.subscribe('places.test');
     })
@@ -111,7 +111,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne({
             type: 'vendor',
             origin: companyId,
-            destiny: Session.get('workfor')
+            destiny: workforId()
         });
         return {
             rel,
@@ -128,8 +128,8 @@ Template.Vendors_panel.helpers({
         return {
             type: 'vendor',
             origin: companyId,
-            destiny: Session.get('workfor'),
-            owner: Session.get('workfor'),
+            destiny: workforId(),
+            owner: workforId(),
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
                 instance.state.set('editingVendorRel', false);
@@ -168,7 +168,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             type: 'contact',
             company: company,
             person: person,
@@ -194,7 +194,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             type: 'place',
             company: company,
             place: place,
@@ -347,7 +347,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne({
             type: 'vendor',
             origin: company,
-            destiny: Session.get('workfor')
+            destiny: workforId()
         });
         return rel;
     },

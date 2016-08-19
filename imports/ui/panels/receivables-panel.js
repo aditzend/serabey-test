@@ -35,7 +35,7 @@ Template.Receivables_panel.helpers({
         const aas = AccountingAccounts.find({
             name: 'owes',
             paid: false,
-            destiny: Session.get('workfor')
+            destiny: workforId()
         });
         let receivable = 0;
 

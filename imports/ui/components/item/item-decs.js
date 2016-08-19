@@ -7,7 +7,7 @@
 // 
 //     this.autorun(() => {
 // 
-//         this.subscribe('items.own', Session.get('workfor'), Session.get('workerRelId'));
+//         this.subscribe('items.own', workforId(), Session.get('workerRelId'));
 // 
 //     });
 // 
@@ -203,8 +203,9 @@ import './item-show.js';
 Template.Item_DECS.onCreated(function() {
 
     this.autorun(() => {
+      const w = workfor();
 
-        this.subscribe('items.own', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('items.own', w._id);
 
     });
 

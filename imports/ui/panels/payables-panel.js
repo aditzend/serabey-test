@@ -17,7 +17,7 @@ Template.Payables_panel.helpers({
         const aas = AccountingAccounts.find({
             name: 'owes',
             paid: false,
-            origin: Session.get('workfor')
+            origin: workforId()
         });
         let payable = 0;
 

@@ -3,79 +3,23 @@ import {
 } from 'meteor/tap:i18n';
 
 Template.navigation.onCreated(function() {
-
     this.state = new ReactiveDict();
-
     this.autorun(() => {
         this.subscribe('userData'),
             this.subscribe('persons.own')
-
     });
-
-
-
 });
-
-
-
 
 Template.navigation.onRendered(function() {
     // Initialize metsiMenu plugin to sidebar menu
     $('#side-menu')
         .metisMenu();
-
-
-
-    // const workerRel = Rels.findOne({
-    //     type: 'worker',
-    //     primary: true
-    // });
-
-    // Session.set('workfor', Rels.findOne({
-    //         type: 'worker',
-    //         primary: true
-    //     })
-    //     .destiny);
-    // Session.set('workerRelId', workerRel._id);
-
-
-
 });
-
 
 Template.navigation.helpers({
     user() {
         return Meteor.user();
     },
-  
-
-    // workerRels() {
-    //     if (Meteor.user()
-    //         .relatedPerson === undefined) {
-    // 
-    // 
-    //         console.log(" show create profile alert");
-    // 
-    //     } else {
-    //         if (Session.get('workfor') === undefined) {
-    //             console.log("setting default company");
-    //             const workerRel = Rels.findOne({
-    //                 type: 'worker',
-    //                 primary: 'true'
-    //             });
-    //             Session.set('workfor', workerRel.destiny);
-    //             Session.set('workerRelId', workerRel._id);
-    //             // origin: instance.state.get('relatedPerson')
-    // 
-    //             return workerRel;
-    //             // console.log("rel ", workerRel);
-    //         }
-    // 
-    //     }
-    // 
-    // 
-    // 
-    // },
 
     companyName(companyId) {
         const company = Companies.findOne(companyId);

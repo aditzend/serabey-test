@@ -62,3 +62,23 @@ bYearOptions = function() {
 
     return optionsArray;
 };
+
+workfor = function() {
+  let index = Session.get('job');
+  let jobs = Meteor.user().jobs;
+  if (index === undefined || jobs == undefined || jobs.length === 0 ) {
+    console.log('NO JOBS FOUND, RETURNING FREELANCE OBJECT');
+    return {
+      _id:Meteor.userId(),
+    name:'Freelance',
+    logo: false};
+  }else{
+    console.log('JOBS FOUND, RETURNING OBJECT');
+    
+    return {
+      _id:jobs[index].companyId,
+    name:jobs[index].companyName,
+    logo: jobs[index].companyLogo};
+  }
+};
+

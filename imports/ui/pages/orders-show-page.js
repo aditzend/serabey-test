@@ -2,7 +2,10 @@ import './orders-show-page.html';
 
 Template.Orders_show_page.onCreated(function() {
   this.autorun( () => {
-    this.subscribe('Orders.test');
+    
+    const w = workfor();
+    
+    this.subscribe('Orders.own', w._id);
   });
 });
 

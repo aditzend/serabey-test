@@ -27,8 +27,7 @@ Template.Dashboard.helpers({
 
     isCompanyAdmin() {
 
-        return (Meteor.user()
-            .admins === undefined) ? false : true;
+        return (Meteor.user().admins === undefined) ? false : true;
     },
 
   
@@ -44,49 +43,34 @@ Template.Dashboard.helpers({
 
         return path;
     },
-    // workingFor() {
-    //     const instance = Template.instance();
-    //     const companyId = Session.get('workfor');
-    //     instance.autorun(() => {
-    //         if (instance.subscriptionsReady()) {
-    //             const company = Companies.findOne(companyId);
-    //             return companyId;
-    //         } else {
-    //             return false;
-    //         }
-    //     })
-    // 
-    // 
-    // 
-    // 
-    // },
-
-    companyLogo() {
-      return Meteor.user().jobs[Session.get('job')].companyLogo;
-
-
-
-    },
-    companyName(companyId) {
-      return Meteor.user().jobs[Session.get('job')].companyName;
+    workingFor() {
+      return workfor();
     }
 });
 
 Template.Dashboard.events({
   'click .js-new-order': function(e,instance) {
-        const newOrder = Orders.insert({soldProducts: []});
-        console.log("creating order", newOrder);
+        const w = workfor();
+        Meteor.call('createOrder', w._id, function(err,res){
+          if (err) {
+            console.log(err);
+          } else {
+            const params = {
+                _id: res
+            };
+            const queryParams = {
+                // state: 'open'
+            };
+            const routeName = 'showOrder';
+            const path = FlowRouter.path(routeName, params, queryParams);
+            
+            FlowRouter.go(path);
+          }
+        });
         
-        const params = {
-            _id: newOrder
-        };
-        const queryParams = {
-            // state: 'open'
-        };
-        const routeName = 'showOrder';
-        const path = FlowRouter.path(routeName, params, queryParams);
+      
         
-        FlowRouter.go(path);
+        
     
   }
   

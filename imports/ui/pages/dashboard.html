@@ -10,11 +10,11 @@
 
             {{#pageTitle title="Panel de Control Principal"}}
             <h2> 
-              <!-- {{#if companyLogo}}
-              <img src="{{companyLogo}}" alt="" />
-              {{else}} -->
-              {{companyName}}
-              <!-- {{/if}} -->
+              {{#if workingFor.logo}}
+              <img src="{{workingFor.logo}}" alt="" />
+              {{else}}
+              {{workingFor.name}}
+              {{/if}}
              </h2>
 
             {{/pageTitle}}

@@ -33,7 +33,7 @@
 //     });
 
 Meteor.publish('items.own',
-    function(workfor, workerRelId) {
+    function(workfor) {
     //     this.autorun(function(computation) {
     //         let workerRel = Rels.findOne(workerRelId, {
     //             fields: {
@@ -71,5 +71,5 @@ Meteor.publish('items.own',
     //             this.ready();
     //         }
     //     });
-    return Items.find();
+    return Items.find({owner:workfor});
     });

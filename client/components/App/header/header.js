@@ -5,8 +5,12 @@ Template.header.onCreated(function() {
 });
 
 Template.header.helpers({
+  workingFor() { 
+   
+  return workfor();
+  },
     // taken from easysearch
-    headerInputAttributes: function() {
+    headerInputAttributes() {
         return {
             'id': 'search-input',
             'class': 'form-control',
@@ -14,22 +18,22 @@ Template.header.helpers({
             'placeholder': "Buscador de contactos"
         };
     },
-    persons: function() {
+    persons() {
         return Persons.find({}, {
             sort: {
                 name: 1
             }
         });
     },
-    headerIndex: function() {
+    headerIndex() {
         return HeaderIndex;
     },
-    oneFound: function() {
+    oneFound() {
         let dict = HeaderIndex.getComponentDict();
 
         return (dict.get('count') === 1) ? true : false;
     },
-    pathTest: function() {
+    pathTest() {
         var params = {
             _id: '5shKQs4j2g7DRfLrnP'
         };

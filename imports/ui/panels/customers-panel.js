@@ -10,9 +10,10 @@ import '../components/rel/rel-customer-show.js';
 
 Template.Customers_panel.onCreated(function() {
     this.autorun(() => {
-        this.subscribe('rels.customers', Meteor.user().jobs[Session.get('workfor')].companyId, Session.get('workerRelId'));
-        this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        const w = workfor();
+        this.subscribe('rels.customers');
+        this.subscribe('rels.places');
+        this.subscribe('rels.contacts');
         // this.subscribe('persons.test');
         // this.subscribe('places.test');
     })
@@ -109,7 +110,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne({
             type: 'customer',
             origin: companyId,
-            destiny: Session.get('workfor')
+            destiny: workforId()
         });
         return {
             rel,
@@ -126,7 +127,7 @@ Template.Customers_panel.helpers({
         return {
             type: 'customer',
             origin: companyId,
-            destiny: Session.get('workfor'),
+            destiny: workforId(),
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
                 instance.state.set('editingCustomerRel', false);
@@ -208,7 +209,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             type: 'contact',
             company: company,
             person: person,
@@ -236,7 +237,7 @@ Template.Customers_panel.helpers({
 
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             type: 'place',
             place: place,
             rel: rel,
@@ -346,7 +347,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne({
             type: 'customer',
             origin: company,
-            destiny: Session.get('workfor')
+            destiny: workforId()
         });
         return rel;
     },

@@ -1,52 +1,39 @@
-// import {
-//   Meteor
-// }
-// from 'meteor/meteor'
-// 
-// Meteor.methods({
-//   'companies.insert' ({
-//     name, country, fin, finType
-//   }) {
-//     new SimpleSchema({
-//       name: {
-//         type: String
-//       },
-//       country: {
-//         type: String
-//       },
-//       fin: {
-//         type: Number
-//       },
-//       finType: {
-//         type: String
-//       }
-//     }).validate({
-//       name, country, fin, finType
-//     });
-//     // 
-//     // const rel = Rels.findOne({
-//     //   origin: origin,
-//     //   destiny: destiny,
-//     //   type: 'worker'
-//     // });
-//     // const person = Persons.findOne(origin);
-//     // console.log(person);
-//     // 
-//     // const ssok = person.ssok;
-// 
-//     // if (!todo.editableBy(this.userId)) {
-//     //   throw new Meteor.Error('todos.updateText.unauthorized',
-//     //     'Cannot edit todos in a private list that is not yours');
-//     // }
-// 
-//     const ssok = generateSsok(this.userId());
-// 
-//     Companies.insert({
-//       name: name,
-//       country: country,
-//       fin: fin,
-//       finType: finType,
-//       ssok: ssok
-//     });
-//   }
-// });
+Meteor.methods({
+    getNumber(companyId,document){
+      //document is the field in counters
+      let number = Companies.findOne({_id:companyId}).counters[document];
+      number++;
+      Companies.update({_id:companyId},{$set:{
+        counters:{
+          [document]:number}
+      }});
+      
+      let numStr = String(number);
+      let i = numStr.length;
+      do {
+        numStr = '0' + numStr;
+        i++;
+      }while(i<8);
+        return  numStr;
+    },
+    getNumberWithPrefix(companyId,docNumber,docPrefix){
+      //document is the field in counters
+      let number = Companies.findOne({_id:companyId}).counters[docNumber];
+      let prefix = Companies.findOne({_id:companyId}).counters[docPrefix];
+      number++;
+      const str = "counters." + docNumber ;
+      Companies.update({_id:companyId},{$set:
+        { 
+          [str]:number
+        }
+    });
+    let numStr = String(number);
+    let i = numStr.length;
+    do {
+      numStr = '0' + numStr;
+      i++;
+    }while(i<8);
+      return prefix + '-' + numStr;
+    }
+
+ });

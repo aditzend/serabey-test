@@ -2,6 +2,7 @@
   <div class='wrapper'>
     <h1>Serabey Specifications</h1>
     
+    
     <h2>User Creation</h2>
     <div class='panel'>
       <p>
@@ -115,11 +116,24 @@ isMale
    position= 'Freelancer'
 </p>
 <p>
-  By default, the job is 0. A job: 0 key is set in Session.
+  By default, the job is 0. A job: 0 key is set in Session at startup.
 </p>
 <p>
   When the company admin validates a position, the method  updates the user.
 </p>
+</div>
+<!-- end block -->
+  <!-- begin block -->
+<h3>Jobs</h3>  
+<div class='panel'>
+  
+
+<p>
+When the user clicks on the nav button, the session stores the index of
+the job that was selected. To extract the name of the company, use 
+Meteor.user().jobs[Session.get("job")].companyName
+</p>
+
 </div>
 <!-- end block -->
 
@@ -168,6 +182,25 @@ isMale
 Numeral is to be found at startup/client/useraccounts-configuration.js
 T9n is what AT uses to translate templates
 i18n files are at i18n/es.i18n.JSON
+
+
+  
+</p>
+</div>
+
+<!-- end block -->
+<!-- begin block -->
+  
+<h3>Counters</h3>  
+
+<div class='panel'>
+  
+<p>
+Counters is an object created on Company insertion. I holds information on prefixes (strings) and numbers (integers) for every type of document.
+To edit from the commandline 
+<strong>Companies.update({_id:'ey4Pu3Qs6JxyrbdX3'},{$set:{['counters.deliveryNoteNumber']:475}})</strong>.
+
+There are 2 methods for getting a number for a new document: getNumber and getNumberWithPrefix. It depends on wether the document uses prefixes.
 
 
   

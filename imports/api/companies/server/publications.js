@@ -24,7 +24,8 @@ Meteor.publish(null, function companiesNames() {
                 fin: 1,
                 finType: 1,
                 logo: 1,
-                country: 1
+                country: 1,
+                counters: 1
             }
         });
     } else {

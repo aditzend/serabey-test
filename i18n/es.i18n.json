@@ -80,7 +80,27 @@
       "Payment method name": "Nombre",
       "Payment method days": "Días",
       "Save": "Crear",
-      "Cancel": "Cancelar"
+      "Cancel": "Cancelar",
+      "Customer": "Cliente",
+      "Select company": "Seleccionar empresa",
+      "Tax": "Imp.",
+      "Taxes" : "Impuestos",
+      "Hide details" :"Ver menos",
+      "Order": "Orden",
+      "Specs": "Especificaciones",
+      "What is this file?": "¿Qué es este archivo?",
+      "Add": "Agregar",
+      "Required": "Requerido",
+      "Delivered": "Entregado",
+      "Remaining": "Remanente",
+      "Loading": "Cargando",
+      "Complete your profile": "Completá tu perfil",
+      "Point of sale": "Punto de venta",
+      "Number" : "Número",
+      "Invoices": "Facturas",
+      "INVOICED": "FACTURADO",
+      "NOT INVOICED": "NO FACTURADO",
+      "Add to invoice": "Agregar a la factura"
       
       
       

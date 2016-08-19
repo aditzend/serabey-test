@@ -1,0 +1,13 @@
+<template name="Invoices_panel">
+  <!-- Invoices_panel here! -->
+  {{#panel title=(_ "Invoices") built=true}}
+
+  {{#if creatingInvoice}}
+  {{> Invoice_edit (createInvoiceArgs order)}}
+  {{else}}
+    <button class='btn btn-success js-create-invoice'>{{_ "New invoice"}}</button>
+  show invoice
+  {{/if}}
+  
+  {{/panel}}
+</template>

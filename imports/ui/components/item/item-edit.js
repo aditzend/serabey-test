@@ -95,6 +95,7 @@ Template.Item_edit.onRendered(function() {
                 this.defaultShowErrors();
             },
             submitHandler: function() {
+                    const w = workfor();
                     let name = instance.$('#nameInput')
                         .val();
                     let desc = instance.$('#descInput')
@@ -107,7 +108,7 @@ Template.Item_edit.onRendered(function() {
                             name: name,
                             desc: desc,
                             profitCenter: profitCenter,
-                            owner: Session.get('workfor')
+                            owner: w._id
                         });
                         instance.data.onSavedData(newItem);
                         swal({

@@ -7,7 +7,7 @@ Template.Items_panel.onCreated(function() {
 
     this.autorun(() => {
 
-        this.subscribe('items.own', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('items.own', workforId(), Session.get('workerRelId'));
 
     });
 

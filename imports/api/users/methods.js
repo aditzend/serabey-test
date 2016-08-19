@@ -32,6 +32,8 @@ Meteor.methods({
             //create a danger log or send an email to superadmin
       //  }
     },
+
+
     'propagateWorkerRelToUser' (relId) {
         console.log("propagating worker rel to user...");
         let rel = Rels.findOne(relId);

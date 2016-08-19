@@ -3,5 +3,11 @@
   "mailgun_hostname": "smtp.mailgun.org",
   "mailgun_login": "postmaster@mg.alexanderditzend.com",
   "mailgun_password": "04ce33580e5cc0352f15393c6b660548",
-  "serabey_sauserid":"BumHS86dXhoAgH7io"
+  "serabey_sauserid":"BumHS86dXhoAgH7io",
+  "galaxy.meteor.com": { 
+     "env": { 
+       "MONGO_URL": "mongodb://serabeysbmu:k3L-oPe-6t4.9Fz@ds153705.mlab.com:53705/serabeysb" 
+     } 
+   }
 }
+

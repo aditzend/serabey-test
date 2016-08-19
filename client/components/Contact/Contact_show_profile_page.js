@@ -8,7 +8,7 @@ Template.Contact_show_profile_page.onCreated(function() {
         // use context to access the URL state
 
 
-        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.contacts');
         if (this.subscriptionsReady()) {
 
 

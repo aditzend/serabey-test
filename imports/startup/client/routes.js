@@ -25,6 +25,7 @@ import '../../ui/pages/order-show-page.js';
 import '../../ui/pages/expense-new-page.js';
 import '../../ui/pages/test-landing-options.js';
 import '../../ui/pages/create-admin-page.js';
+import '../../ui/pages/delivery-note-show-page.js';
 import '../../ui/layouts/landing-layout.html';
 import '../../ui/specs/specs-home.html';
 
@@ -32,7 +33,7 @@ import '../../ui/specs/specs-home.html';
 FlowRouter.route('/onloggedin', {
     triggersEnter: [AccountsTemplates.ensureSignedIn],
     action(params, queryParams) {
-        if (Meteor.user()
+        if (Meteor.user() && Meteor.user()
             .relatedPerson) {
             FlowRouter.go('/');
 
@@ -103,6 +104,17 @@ FlowRouter.route('/order/:_id/', {
     action(params, queryParams) {
         BlazeLayout.render('App_body', {
             main: 'Order_show_page'
+        });
+        //console.log('params', params);
+
+    }
+});
+FlowRouter.route('/delivery-note/:_id/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'showDeliveryNote',
+    action(params, queryParams) {
+        BlazeLayout.render('App_body', {
+            main: 'DeliveryNote_show_page'
         });
         //console.log('params', params);
 

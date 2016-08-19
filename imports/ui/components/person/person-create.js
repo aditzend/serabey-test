@@ -250,7 +250,7 @@ Template.Person_create.onRendered(function() {
                     console.log("bDay : " + bDay);
                     console.log("bMonth : " + bMonth);
                     console.log("bYear : " + bYear);*/
-                    Session.set('creating', false);
+                    //Session.set('creating', false);
                 }
                 /*  var createdActode = Actodes.findOne(insert);
       console.log(createdActode.treatedAs);

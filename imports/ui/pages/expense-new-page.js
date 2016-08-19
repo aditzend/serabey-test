@@ -34,7 +34,7 @@ Template.Expense_new_page.onCreated(function() {
 
         let tooSubscription = this.subscribe('transfers_of_ownership.test');
         let toodSubscription = this.subscribe('transfer_of_ownership_details.test');
-        let customerRelSubscription = this.subscribe('customerRels', Session.get('workfor'));
+        let customerRelSubscription = this.subscribe('customerRels', workforId());
         FlowRouter.watchPathChange();
 
         if (tooSubscription.ready()) {
@@ -438,7 +438,7 @@ Template.Expense_new_page.events({
 
         const newTood = TransferOfOwnershipDetails.insert({
             too: instance.state.get('tooId'),
-            owner: Session.get('workfor'),
+            owner: workforId(),
             item: instance.state.get('sellingItemId'),
             profitCenter: instance.state.get('sellingItemProfitCenter'),
             amount: amount,
@@ -449,16 +449,16 @@ Template.Expense_new_page.events({
         });
         AccountingAccounts.insert({
             name: 'vatReceivable', //iva creadito
-            owner: Session.get('workfor'),
+            owner: workforId(),
             value: amount * price * (1 - discount * 0.01) * taxes * 0.01,
             tood: newTood
 
         });
         AccountingAccounts.insert({
             name: 'owes', //clientBalance o saldo cuenta corriente del cliente
-            origin: Session.get('workfor'),
+            origin: workforId(),
             destiny: company,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             value: amount * price * (1 - discount * 0.01) * (1 + taxes * 0.01),
 
             dueDate: moment()

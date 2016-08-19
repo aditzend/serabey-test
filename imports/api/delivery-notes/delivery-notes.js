@@ -1,5 +1,5 @@
-Deliveries = new Mongo.Collection('deliveries');
-Deliveries.before.insert(function(userId, doc) {
+DeliveryNotes = new Mongo.Collection('delivery_notes');
+DeliveryNotes.before.insert(function(userId, doc) {
     doc.createdAt = moment()
         .format();
     doc.author = Meteor.userId();

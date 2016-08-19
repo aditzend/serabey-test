@@ -36,7 +36,7 @@ Meteor.publish('companyWorkerRels',
         }
     });
 Meteor.publish(null,
-    function(workfor, workerRelId) {
+    function() {
 
 
 
@@ -54,7 +54,7 @@ Meteor.publish(null,
         }
     });
 Meteor.publish('rels.customers',
-    function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
+    function() { //f7BXSGPQY3gnKf9zr
         // this.autorun(function(computation) {
         //     let workerRel = Rels.findOne(workerRelId, {
         //         fields: {
@@ -100,7 +100,7 @@ Meteor.publish('customerRels',
         if (this.userId) {
             return Rels.find({
                 type: 'customer',
-                destiny: workfor
+              destiny: workfor
             }, {
                 fields: {
                     owner: false
@@ -112,7 +112,7 @@ Meteor.publish('customerRels',
     });
 
 Meteor.publish('rels.vendors',
-    function(workfor, workerRelId) { 
+    function() { 
         // this.autorun(function(computation) {
         //     let workerRel = Rels.findOne(workerRelId, {
         //         fields: {
@@ -156,7 +156,7 @@ Meteor.publish('rels.vendors',
 
 
 Meteor.publish('rels.contacts',
-    function(workfor, workerRelId) {
+    function() {
         // this.autorun(function(computation) {
         //     let workerRel = Rels.findOne(workerRelId, {
         //         fields: {

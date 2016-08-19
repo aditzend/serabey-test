@@ -16,38 +16,38 @@ Template.Place_edit.onRendered(function() {
     //console.log(instance.data);
 
     //-----------------------------geocomplete
-    this.autorun(() => {
-        if (GoogleMaps.loaded()) {
-            $('#addressInput')
-                .geocomplete({
-                    map: ".map_canvas",
-                    location: [$('#lat')
-                        .val(), $('#lng')
-                        .val()
-                    ],
-                    details: "[data-action=result]",
-                    markerOptions: {
-                        draggable: true
-                    }
-                });
-
-        }
-        $("#addressInput")
-            .geocomplete()
-            .bind("geocode:result", function(event, result) {
-                // console.log(result);
-            });
-        $("#addressInput")
-            .bind("geocode:dragged", function(event, latLng) {
-                $("input[name=lat]")
-                    .val(latLng.lat());
-                // console.log(latLng.lat());
-
-                $("input[name=lng]")
-                    .val(latLng.lng());
-            });
-
-    });
+    // this.autorun(() => {
+    //     if (GoogleMaps.loaded()) {
+    //         $('#addressInput')
+    //             .geocomplete({
+    //                 map: ".map_canvas",
+    //                 location: [$('#lat')
+    //                     .val(), $('#lng')
+    //                     .val()
+    //                 ],
+    //                 details: "[data-action=result]",
+    //                 markerOptions: {
+    //                     draggable: true
+    //                 }
+    //             });
+    // 
+    //     }
+    //     $("#addressInput")
+    //         .geocomplete()
+    //         .bind("geocode:result", function(event, result) {
+    //             // console.log(result);
+    //         });
+    //     $("#addressInput")
+    //         .bind("geocode:dragged", function(event, latLng) {
+    //             $("input[name=lat]")
+    //                 .val(latLng.lat());
+    //             // console.log(latLng.lat());
+    // 
+    //             $("input[name=lng]")
+    //                 .val(latLng.lng());
+    //         });
+    // 
+    // });
 
     $('[data-action=result]')
         .validate({

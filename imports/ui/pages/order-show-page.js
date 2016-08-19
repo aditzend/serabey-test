@@ -7,6 +7,8 @@ import '/imports/ui/components/company/company-decs.js';
 import '/imports/ui/components/item/item-decs.js';
 import '/imports/ui/components/too-detail/too-detail-show.js';
 import '/imports/ui/components/too-detail/too-detail-edit.js';
+import '/imports/ui/panels/deliveries-panel.js';
+import '/imports/ui/panels/invoices-panel.js';
 import './order-show-page.html';
 import numeral from 'numeral';
 
@@ -25,21 +27,20 @@ Template.Order_show_page.onCreated(function() {
         //  selectedProduct: false,
         orderId: false,
         sellingItemName: false,
+        sellingItemDesc: false,
         sellingItemId: false,
-        sellingItemName: false,
-        editingDeliveryId:false,
         grandTotal: false,
         dateDefined: false,
         uploadingFile: false,
-        addingOrderDetail:false
+        addingOrderDetail:false,
     });
 
     this.autorun(() => {
-
-        let orderSubscription = this.subscribe('Orders.test');
-        let orderDetailSubscription = this.subscribe('OrderDetails.test');
+        let w = workfor();
+        let orderSubscription = this.subscribe('Orders.own', w._id);
+        let orderDetailSubscription = this.subscribe('OrderDetails.own', w._id);
         let deliveriesSubscription = this.subscribe('Deliveries.test');
-        let customerRelSubscription = this.subscribe('customerRels', Session.get('workfor'));
+        let customerRelSubscription = this.subscribe('customerRels', w._id);
         // let paymentMethodSubscription = this.subscribe('PaymentMethods.test');
         FlowRouter.watchPathChange();
 
@@ -57,26 +58,30 @@ Template.Order_show_page.onCreated(function() {
                 this.state.set('invoiceType', false);
 
             }
+            if (order.destiny) {
+              this.state.set('company', order.destiny);
+            }else{
+              this.state.set('company',false);
+            }
             //console.log('invoiceType', this.state.get('invoiceType'));
 
             //  console.log('too', too);
             // console.log('orderId', orderId);
             // console.log('too', too);
             // console.log('order.destiny', order.destiny);
-            if (order.destiny) {
-                this.state.set('company', order.destiny);
-                const rel = Rels.findOne({
-                    type: 'customer',
-                    origin: order.destiny
-                }, {
-                    fields: {
-                        paymentDays: 1
-                    }
-                });
-                this.state.set('paymentDays', rel.paymentDays);
+            // if (order.destiny) {
+            //     this.state.set('company', order.destiny);
+            //     const rel = Rels.findOne({
+            //         type: 'customer',
+            //         origin: order.destiny
+            //     }, {
+            //         fields: {
+            //             paymentDays: 1
+            //         }
+            //     });
                 // console.log('paymentDays', this.state.get('paymentDays'));
 
-            }
+            //}
 
 
 
@@ -93,6 +98,7 @@ Template.Order_show_page.onRendered(function() {
 
     const instance = Template.instance();
 
+    
     // $('.date-picker')
     //     .datepicker();
     // const today = moment()
@@ -117,50 +123,56 @@ Template.Order_show_page.onRendered(function() {
 
 });
 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+////////////////////////////ARGS/////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
 Template.Order_show_page.helpers({
+
+  
+  deliveryArgs(order){
+    const instance = Template.instance();
+    
+    return {
+      order:order,
+      orderId: instance.state.get('orderId'),
+      destiny: instance.state.get('company')
+    };
+  },
+  invoiceArgs(order){
+    const instance = Template.instance();
+    
+    return {
+      order:order,
+      orderId: instance.state.get('orderId'),
+      destiny: instance.state.get('company')
+    };
+  }
+
+});
+
+Template.Order_show_page.helpers({
+  // 
+  // creatingInvoice() {
+  //   const instance = Template.instance();
+  //   return instance.state.get('creatingInvoice');
+  // },
+
   addingOrderDetail() {
     const instance = Template.instance();
     
     return instance.state.get('addingOrderDetail');
   },
-  editingDelivery() {
-    const instance = Template.instance();
-    
-    return Deliveries.findOne({_id:instance.state.get('editingDeliveryId')});
-  },
+
   plusOne(string) {
     return 1+ Number(string);
   },
-  creatingDelivery() {
-    const instance = Template.instance();
-    return instance.state.get('editingDeliveryId');
-  },
-  sumAllDeliveries(deliveries) {
 
-    for (i=0, len = deliveries.length, sum = 0; i < len; i++){
-      sum += Number(deliveries[i].amount);
-      //console.log("sum is now", sum);
-      
-    };
-    return sum;
-    
-    
-    
-    //return deliveries.length;
-  },
-  remainingDeliveries(amount,deliveries) {
 
-    for (i=0, len = deliveries.length, sum = 0; i < len; i++){
-      sum += Number(deliveries[i].amount);
-      //console.log("sum is now", sum);
-      
-    };
-    return amount - sum;
-    
-    
-    
-    //return deliveries.length;
-  },
   formatAsNumber(number) {
     return numeral(number).format('0,0');
   },
@@ -218,10 +230,72 @@ Template.Order_show_page.helpers({
                 instance.state.set('deletingDetail', orderDetailId);
                 
                 const deletedDetail = Meteor.call('removeDetail',instance.state.get('orderId'),orderDetailId);
-              
+              Meteor.call('removeOrderDetail',orderDetailId);
                 
             }
         }
+    },
+    createDetailArgs() {
+      const instance = Template.instance();
+      const w = workfor();
+      return {
+        onAddItem(expectedDate,amount,price,discount,taxes) {
+          //console.log("AMOUNT CREATED",amount);
+          
+          const tood = {
+            order: instance.state.get('orderId'),
+            owner: w._id,
+            origin: w._id,
+            destiny: instance.state.get('company'),
+            item: instance.state.get('sellingItemId'),
+            profitCenter: instance.state.get('sellingItemProfitCenter'),
+            expectedDate: moment(expectedDate).format(),
+            amount: amount,
+            price: price,
+            discount: discount,
+            taxes: taxes
+          };
+          //console.log('tood is...' , tood);
+          Meteor.call('createOrderDetail',tood,function(err,res){
+            if (err) {
+              console.log(err);
+            }else{
+              const propagateOrderDetailToOrderArgs = {
+                order: instance.state.get('orderId'),
+                orderDetail: res,
+                item: instance.state.get('sellingItemId'),
+                itemName: instance.state.get('sellingItemName'),
+                itemDesc: instance.state.get('sellingItemDesc'),
+                expectedDate: moment(expectedDate).format(),
+                amount: amount,
+                price: price,
+                discount: discount,
+                taxes: taxes
+              };
+              console.log(propagateOrderDetailToOrderArgs);
+              Meteor.call('propagateOrderDetailToOrder',
+              propagateOrderDetailToOrderArgs, function(err,res){
+                if (err) {
+                  console.log(err);
+                }else{
+                  instance.state.set('addingOrderDetail',false);
+                  instance.state.set('sellingItemId',false);
+                  instance.state.set('sellingItemName',false);
+                }
+              });
+            }
+          });
+    
+        },
+        onCancelItem() {
+          instance.state.set('addingOrderDetail',false);
+          instance.state.set('sellingItemId',false);
+          instance.state.set('sellingItemName',false);
+          
+        }
+        
+        
+      }
     },
     editDetailArgs(detail) {
         const instance = Template.instance();
@@ -259,7 +333,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(detail) {
             amountTotal += Number(detail.amount);
         });
-        return amountTotal;
+        return numeral(amountTotal).format('0,0');
     },
     subtotal(details) {
         const instance = Template.instance();
@@ -274,7 +348,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(orderDetail) {
             grossTotal += Number(orderDetail.amount) * Number(orderDetail.price);
         });
-        return grossTotal;
+        return numeral(grossTotal).format('$0,0.00');
     },
     discount(details) {
         let discount = 0;
@@ -288,7 +362,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(orderDetail) {
             discount += (Number(orderDetail.amount) * Number(orderDetail.price)) * Number(orderDetail.discount) * 0.01;
         });
-        return discount;
+        return numeral(discount).format('$0,0.00');
     },
     // discountTotal() {
     //     const instance = Template.instance();
@@ -319,7 +393,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(orderDetail) {
             netTotal += (Number(orderDetail.amount) * Number(orderDetail.price)) * (1 - Number(orderDetail.discount) * 0.01);
         });
-        return netTotal;
+        return numeral(netTotal).format('$0,0.00');
     },
     taxes(details) {
         const instance = Template.instance();
@@ -334,7 +408,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(orderDetail) {
             taxes += (Number(orderDetail.amount) * Number(orderDetail.price)) * (1 - Number(orderDetail.discount) * 0.01) * (Number(orderDetail.taxes) * 0.01);
         });
-        return taxes;
+        return numeral(taxes).format('$0,0.00');
     },
     grandTotal(details) {
         const instance = Template.instance();
@@ -349,7 +423,7 @@ Template.Order_show_page.helpers({
         details.forEach(function(orderDetail) {
             grandTotal += (Number(orderDetail.amount) * Number(orderDetail.price)) * (1 - Number(orderDetail.discount) * 0.01) * (1 + Number(orderDetail.taxes) * 0.01);
         });
-        return grandTotal;
+        return numeral(grandTotal).format('$0,0.00');
     },
     sellingItemName() {
         const instance = Template.instance();
@@ -480,8 +554,9 @@ Template.Order_show_page.helpers({
             params: 'show-details',
             index: CustomersIndex,
             selectedCompanyId: companyId,
-            selectedCompany(id, name, fin , finType) {
+            selectedCompany(id, name, fin , finType, paymentDays) {
                 instance.state.set('company', id);
+                console.log('selectedCompany', id);
                 //instance.state.set('switchingCompany', false);
 
                 //  console.log('company', id);
@@ -494,9 +569,11 @@ Template.Order_show_page.helpers({
                         destiny: id,
                         destinyName: name,
                         destinyFin: fin,
-                        destinyFinType: finType
+                        destinyFinType: finType,
+                        paymentDays: paymentDays
                     }
                 });
+                instance.state.set('paymentDays',paymentDays);
 
                 // console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
             },
@@ -521,107 +598,24 @@ Template.Order_show_page.helpers({
 });
 
 Template.Order_show_page.events({
+  // 'click .js-create-invoice': function(e,instance) {
+  //   instance.state.set('creatingInvoice', true);
+  //   
+  // },      
   'click .js-add-order-detail': function(e,instance) {
     instance.state.set('addingOrderDetail',true);
+    console.log('ADDING ORDER DETAIL');
+  },
+  'click .js-cancel-add-order-detail': function(e,instance) {
+    instance.state.set('addingOrderDetail',false);
+    console.log('CANCEL ADDING ORDER DETAIL');
   },
     'click .js-save-sale': function(e, instance) {
 
         FlowRouter.go('home');
     },
-    'click .js-add-item': function(e, instance) {
-
-        const amount = instance.$('.js-amount')
-            .val() || 0;
-        const price = instance.$('.js-price')
-            .val() || 0;
-
-        const discount = instance.$('.js-discount')
-            .val() || 0;
-        const taxes = instance.$('.js-taxes')
-            .val() || 0;
-        const company = instance.state.get('company');
-
-      
-
-        const tood = {
-                        order: instance.state.get('orderId'),
-                        owner: Session.get('workfor'),
-                        item: instance.state.get('sellingItemId'),
-                        profitCenter: instance.state.get('sellingItemProfitCenter'),
-                        amount: amount,
-                        price: price,
-                        discount: discount,
-                        taxes: taxes
-                      };
-                      console.log("tood:", tood);
-          let newOrderDetail;            
-        Meteor.call('createOrderDetail', tood, function(error, res){
-          if (error) {
-            console.log("Error inserting order detail", Meteor.error);
-          }else{
-            console.log("order detail id is ", res);
-            newOrderDetail = res;
-            
-            //create methods for all these...
-            
-            Orders.update({_id: instance.state.get('orderId')},
-                            {$push: {
-                              soldProducts : {
-                                orderDetailId: newOrderDetail,
-                                item: instance.state.get('sellingItemId'),
-                                itemName: instance.state.get('sellingItemName'),
-                                itemDesc: instance.state.get('sellingItemDesc'),
-                                profitCenter: instance.state.get('sellingItemProfitCenter'),
-                              
-                                amount: amount,
-                                price: price,
-                                discount: discount,
-                                taxes: taxes,
-                                createdAt: moment().format(),
-                                author: Meteor.userId(),
-                                authorName: Meteor.user().name,
-                                authorLastName: Meteor.user().lastName
-                              }
-                            }});
-            AccountingAccounts.insert({
-                name: 'vatPayable', //iva debito
-                owner: Session.get('workfor'),
-                value: amount * price * (1 - discount * 0.01) * taxes * 0.01,
-                orderDetail: newOrderDetail
-            
-            });
-            AccountingAccounts.insert({
-                name: 'owes', //clientBalance o saldo cuenta corriente del cliente
-                destiny: Session.get('workfor'),
-                origin: company,
-                owner: Session.get('workfor'),
-                value: amount * price * (1 - discount * 0.01) * (1 + taxes * 0.01),
-            
-                dueDate: moment()
-                    .add(1, 'days')
-                    .format(),
-                paid: false,
-                orderDetail: newOrderDetail
-            
-            });
-          }
-          }
-        );
-        
-        
-      
-        
-      
-        instance.state.set('sellingItemName', false);
-
-    },
-    'click .js-cancel-item': function(e, instance) {
-
-        //instance.state.set('selectedProduct', false);
-        instance.state.set('sellingItemName', false);
-        console.log('cancel');
-
-    },
+    
+  
     'click .js-show-company-details': function(e, instance) {
         instance.state.set('showCompanyDetails', true);
 
@@ -664,105 +658,53 @@ Template.Order_show_page.events({
         instance.state.set('invoiceType', invoiceType);
 
 
-    },
-    'click .js-add-item-to-delivery': function(e,instance) {
-      console.log("index", e.target.id);
-      Meteor.call('addDeliveryItemToOrder',instance.state.get('orderId'),e.target.id,100)
-      ;
-  
-      
-    },
-    'submit .js-add-item-to-delivery-form': function(e,instance) {
-      e.preventDefault();
-      const item = {itemId:e.target.id,
-                    itemName:e.target.name,
-                    packaging:e.target.packaging.value,
-                    amount:e.target.amount.value};
-      console.log("amount", e.target.amount.value);
-      Meteor.call('addDeliveryItemToOrder',instance.state.get('orderId'),e.target.id,e.target.amount.value,e.target.packaging.value)
-      ;
-      Meteor.call('updateDelivery',instance.state.get('editingDeliveryId'),item);
-      
-    },
-    'click .js-create-delivery': function(e,instance) {
-  
-      
-      Meteor.call('createDelivery',
-      instance.state.get('orderId'),
-    instance.state.get('company'),
-    function (err,res) {
-      if (err) {
-        console.log("ERROR", err);
-      }
-      else{
-        console.log("new delivery ",res);
-        instance.state.set('editingDeliveryId',res);
-        Meteor.call('propagateDeliveryToOrder',
-        instance.state.get('orderId'),
-      res
-    );
-        
-      }
     }
-    
-  );
-  
-  
-      
-      
-    },
+    ,
     'click .js-goto-upload-file': function(e, instance) {
         instance.state.set('uploadingFile', true);
     },
     'click .js-upload-file': function(e, instance) {
         console.log("call filestack");
-        filepicker.pick({
-
-                language: 'es',
-                container: 'window',
-                services: ['COMPUTER']
-            },
-            function(Blob) {
-                //console.log('Storing in session' + JSON.stringify(Blob.url));
-                const orderId = instance.state.get('orderId');
-                let updateFiles = {};
-                let file = {
-                    url: Blob.url
-                };
-                let name = instance.$('#uploadingFileInput')
-                    .val();
-                updateFiles['files.' + name] = file;
-
-                let pushFile = {
-                    name: name,
-                    url: Blob.url
-                };
-
-
-                Orders.update({
-                    _id: orderId
-                }, {
-                    $push: {
-                        files: pushFile
-                    }
-                });
-                instance.state.set('uploadingFile', false);
-                // Session.set(
-                //   'url', JSON.stringify(Blob.url)
-                // );
-                // Session.set(
-                //   'artworkUploaded', true
-                // );
-                // console.log("Artwork URL " + Session.get('artworkUrl'));
-
-            },
-            function(FPError) {
-                // Session.set(
-                //   'artworkUploaded', false
-                // );
-                console.log(FPError.toString());
-            }
-        );
+        // filepicker.pick({
+        // 
+        //         language: 'es',
+        //         container: 'window',
+        //         services: ['COMPUTER']
+        //     },
+        //     function(Blob) {
+        //         //console.log('Storing in session' + JSON.stringify(Blob.url));
+        //         const orderId = instance.state.get('orderId');
+        //         let updateFiles = {};
+        //         let file = {
+        //             url: Blob.url
+        //         };
+        //         let name = instance.$('#uploadingFileInput')
+        //             .val();
+        //         updateFiles['files.' + name] = file;
+        // 
+        //         let pushFile = {
+        //             name: name,
+        //             url: Blob.url
+        //         };
+        // 
+        // 
+        //         Orders.update({
+        //             _id: orderId
+        //         }, {
+        //             $push: {
+        //                 files: pushFile
+        //             }
+        //         });
+        //         instance.state.set('uploadingFile', false);
+        //   
+        //     },
+        //     function(FPError) {
+        //         // Session.set(
+        //         //   'artworkUploaded', false
+        //         // );
+        //         console.log(FPError.toString());
+        //     }
+        // );
 
     }
 

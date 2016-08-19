@@ -14,10 +14,10 @@ import '../rel/rel-vendor-edit.js';
 
 Template.Company_DECS.onCreated(function() {
     this.autorun(() => {
-        this.subscribe('rels.customers', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.vendors', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.customers' );
+        this.subscribe('rels.vendors');
+        this.subscribe('rels.places');
+        this.subscribe('rels.contacts');
         // this.subscribe('persons.test');
         // this.subscribe('places.test');
     })
@@ -59,10 +59,11 @@ Template.Company_DECS.helpers({
         const instance = Template.instance();
 
         return {
-            mode: 'customer',
-            index: CustomersIndex,
+            mode: instance.data.mode,
+            index: instance.data.index,
             selectedCompany(id) {
                 instance.state.set('selectedCompany', id);
+                console.log('DECS searchCompanyArgs SELECTED ID:' , id);
                 // console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
             },
             companyNotFound(insertedText) {
@@ -74,9 +75,10 @@ Template.Company_DECS.helpers({
         const instance = Template.instance();
         const company = Companies.findOne(selectedCompanyId);
         instance.data.fin(company.fin);
+        
         instance.data.finType(company.finType);
         instance.data.name(company.name);
-        instance.data.selectedCompany(selectedCompanyId,company.name,company.fin,company.finType);
+        instance.data.selectedCompany(selectedCompanyId,company.name,company.fin,company.finType, company.paymentDays);
 
         return {
             company: company,
@@ -129,10 +131,11 @@ Template.Company_DECS.helpers({
     },
     showRelArgs(companyId) {
         const instance = Template.instance();
+        const w = workfor();
         const rel = Rels.findOne({
             type: instance.state.get('mode'),
             origin: companyId,
-            destiny: Session.get('workfor')
+            destiny: w._id
         });
         //  instance.data.paymentDays(rel.paymentDays);
         return {
@@ -146,11 +149,11 @@ Template.Company_DECS.helpers({
     },
     editRelArgs(companyId) {
         const instance = Template.instance();
-
+        const w = workfor();
         return {
             type: instance.state.get('mode'),
             origin: companyId,
-            destiny: Session.get('workfor'),
+            destiny: w._id,
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
                 instance.state.set('editingCustomerRel', false);
@@ -230,9 +233,10 @@ Template.Company_DECS.helpers({
         const company = Companies.findOne(companyId);
         const person = Persons.findOne(personId);
         const rel = Rels.findOne(relId);
+        const w = workfor();
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: w._id,
             type: 'contact',
             company: company,
             person: person,
@@ -255,12 +259,13 @@ Template.Company_DECS.helpers({
         const instance = Template.instance();
         let rel = Rels.findOne(relId);
         const place = Places.findOne(placeId);
+        const w = workfor();
         console.log('STATE VAR editingPlace :', instance.state.get('editingPlace'));
         console.log('relId parameter received', relId);
 
         return {
             destiny: companyId,
-            owner: Session.get('workfor'),
+            owner: w._id,
             type: 'place',
             place: place,
             rel: rel,
@@ -370,11 +375,11 @@ Template.Company_DECS.helpers({
 Template.Company_DECS.helpers({
     rel(company) {
         const instance = Template.instance();
-
+        const w = workfor();
         const rel = Rels.findOne({
             type: instance.state.get('mode'),
             origin: company,
-            destiny: Session.get('workfor')
+            destiny: w._id
         });
         return rel;
     },

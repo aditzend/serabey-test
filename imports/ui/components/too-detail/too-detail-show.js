@@ -25,6 +25,16 @@ Template.TooDetailShow.onRendered(function() {
 });
 
 Template.TooDetailShow.helpers({
+  to(b) {
+    const a = moment();
+    return a.to(moment(b));
+  },
+  formatInteger(num) {
+    return numeral(num).format('0,0');
+  },
+  formatCurrency(num) {
+    return numeral(num).format('$0,0.00');
+  },
 
     rowState() {
         const instance = Template.instance();
@@ -54,12 +64,12 @@ Template.TooDetailShow.events({
         }
     },
     'click .js-delete-detail': function(e, instance) {
-        const detailIndex = instance.$('.js-delete-detail')
+        const orderDetailId = instance.$('.js-delete-detail')
             .attr('id');
         const total = instance.$('#total')
             .val();
-        instance.data.onDelete(detailIndex, total);
-        console.log("detail index clicked:", detailIndex);
+        instance.data.onDelete(orderDetailId, total);
+        console.log("detail clicked:", orderDetailId);
         
     }
 });

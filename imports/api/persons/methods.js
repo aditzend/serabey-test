@@ -39,11 +39,7 @@ Meteor.methods({
                 userssok: userssok,
                 name: person.name,
                 lastName: person.lastName,
-                jobs: [{
-                    companyName: person.name,
-                    companyId: personId,
-                    position:'freelancer'
-                }]
+                jobs: []
             }
         });
         Persons.update(personId, {

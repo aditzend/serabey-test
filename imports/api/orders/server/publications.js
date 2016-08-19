@@ -23,3 +23,13 @@ Meteor.publish('Orders.test', function ordersTest() {
     }
 
 });
+Meteor.publish('Orders.own', function ordersOwn(ownerId) {
+    if (this.userId) {
+        return Orders.find({
+          owner:ownerId
+        });
+    } else {
+        this.ready();
+    }
+
+});

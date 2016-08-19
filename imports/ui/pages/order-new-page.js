@@ -33,9 +33,9 @@ Template.Order_new_page.onCreated(function() {
 
     this.autorun(() => {
 
-        let orderSubscription = this.subscribe('Orders.test');
-        let orderDetailSubscription = this.subscribe('OrderDetails.test');
-        let customerRelSubscription = this.subscribe('customerRels', Session.get('workfor'));
+        //let orderSubscription = this.subscribe('Orders.');
+        // let orderDetailSubscription = this.subscribe('OrderDetails.test');
+        let customerRelSubscription = this.subscribe('customerRels', workforId());
         // let paymentMethodSubscription = this.subscribe('PaymentMethods.test');
         FlowRouter.watchPathChange();
 
@@ -499,7 +499,7 @@ Template.Order_new_page.events({
 
         const newOrderDetail = OrderDetails.insert({
             order: instance.state.get('orderId'),
-            owner: Session.get('workfor'),
+            owner: workforId(),
             item: instance.state.get('sellingItemId'),
             profitCenter: instance.state.get('sellingItemProfitCenter'),
             amount: amount,
@@ -510,16 +510,16 @@ Template.Order_new_page.events({
         });
         AccountingAccounts.insert({
             name: 'vatPayable', //iva debito
-            owner: Session.get('workfor'),
+            owner: workforId(),
             value: amount * price * (1 - discount * 0.01) * taxes * 0.01,
             orderDetail: newOrderDetail
 
         });
         AccountingAccounts.insert({
             name: 'owes', //clientBalance o saldo cuenta corriente del cliente
-            destiny: Session.get('workfor'),
+            destiny: workforId(),
             origin: company,
-            owner: Session.get('workfor'),
+            owner: workforId(),
             value: amount * price * (1 - discount * 0.01) * (1 + taxes * 0.01),
 
             dueDate: moment()
@@ -587,53 +587,53 @@ Template.Order_new_page.events({
     },
     'click .js-upload-file': function(e, instance) {
         console.log("call filestack");
-        filepicker.pick({
-
-                language: 'es',
-                container: 'window',
-                services: ['COMPUTER']
-            },
-            function(Blob) {
-                //console.log('Storing in session' + JSON.stringify(Blob.url));
-                const orderId = instance.state.get('orderId');
-                let updateFiles = {};
-                let file = {
-                    url: Blob.url
-                };
-                let name = instance.$('#uploadingFileInput')
-                    .val();
-                updateFiles['files.' + name] = file;
-
-                let pushFile = {
-                    name: name,
-                    url: Blob.url
-                };
-
-
-                Orders.update({
-                    _id: orderId
-                }, {
-                    $push: {
-                        files: pushFile
-                    }
-                });
-                instance.state.set('uploadingFile', false);
-                // Session.set(
-                //   'url', JSON.stringify(Blob.url)
-                // );
-                // Session.set(
-                //   'artworkUploaded', true
-                // );
-                // console.log("Artwork URL " + Session.get('artworkUrl'));
-
-            },
-            function(FPError) {
-                // Session.set(
-                //   'artworkUploaded', false
-                // );
-                console.log(FPError.toString());
-            }
-        );
+        // filepicker.pick({
+        // 
+        //         language: 'es',
+        //         container: 'window',
+        //         services: ['COMPUTER']
+        //     },
+        //     function(Blob) {
+        //         //console.log('Storing in session' + JSON.stringify(Blob.url));
+        //         const orderId = instance.state.get('orderId');
+        //         let updateFiles = {};
+        //         let file = {
+        //             url: Blob.url
+        //         };
+        //         let name = instance.$('#uploadingFileInput')
+        //             .val();
+        //         updateFiles['files.' + name] = file;
+        // 
+        //         let pushFile = {
+        //             name: name,
+        //             url: Blob.url
+        //         };
+        // 
+        // 
+        //         Orders.update({
+        //             _id: orderId
+        //         }, {
+        //             $push: {
+        //                 files: pushFile
+        //             }
+        //         });
+        //         instance.state.set('uploadingFile', false);
+        //         // Session.set(
+        //         //   'url', JSON.stringify(Blob.url)
+        //         // );
+        //         // Session.set(
+        //         //   'artworkUploaded', true
+        //         // );
+        //         // console.log("Artwork URL " + Session.get('artworkUrl'));
+        // 
+        //     },
+        //     function(FPError) {
+        //         // Session.set(
+        //         //   'artworkUploaded', false
+        //         // );
+        //         console.log(FPError.toString());
+        //     }
+        // );
 
     }
 

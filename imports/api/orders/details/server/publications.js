@@ -17,7 +17,19 @@ from 'meteor/meteor';
 // });
 Meteor.publish('OrderDetails.test', function OrderDetailsTest() {
     if (this.userId) {
-        return OrderDetails.find();
+        return OrderDetails.find({
+          
+        });
+    } else {
+        this.ready();
+    }
+
+});
+Meteor.publish('OrderDetails.own', function OrderDetailsOwn(ownerId) {
+    if (this.userId) {
+        return OrderDetails.find({
+          owner: ownerId
+        });
     } else {
         this.ready();
     }
